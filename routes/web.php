@@ -7,6 +7,7 @@ use App\Http\Controllers\Front\FrontController;
 
 // Home
  Route::get('/', [FrontController::class, 'home'])->name('home');
+ Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
 
 
 // Admin 
