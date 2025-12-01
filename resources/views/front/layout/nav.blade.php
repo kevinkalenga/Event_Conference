@@ -1,7 +1,7 @@
 <div class="container main-menu" id="navbar">
             <div class="row">
                 <div class="col-lg-2 col-sm-12"> 
-                    <a href="index.html" id="logo" class="grid_2"> <img src="{{asset('dist-front/images/logo.png')}}"> </a> 
+                    <a href="{{route('home')}}" id="logo" class="grid_2"> <img src="{{asset('dist-front/images/logo.png')}}"> </a> 
                 </div>
                 <div class="col-lg-10 col-sm-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
@@ -39,7 +39,7 @@
                                 </li>
                                 <li class="member-login-button">
                                     <div class="inner">
-                                        <a class="smooth-scroll nav-link" href="login.html">
+                                        <a class="smooth-scroll nav-link" href="{{route('login')}}">
                                             <i class="fa fa-sign-in"></i> Login
                                         </a>
                                     </div>
