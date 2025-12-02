@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-             $table->string('name')->nullable;
+             $table->string('name')->nullable();
              $table->string('email')->unique();
              $table->string('photo')->nullable();
              $table->string('password')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
              $table->string('city')->nullable();
              $table->string('zip')->nullable();
              $table->string('token')->nullable();
-             $table->string('status')->default(0)->comment('0=pending, 1=active, 2=suspended');
+             $table->tinyInteger('status')->default(0)->comment('0=pending, 1=active, 2=suspended');
             $table->timestamps();
         });
 

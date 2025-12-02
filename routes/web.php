@@ -9,12 +9,28 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/', [FrontController::class, 'home'])->name('home');
  Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
  Route::get('/login', [FrontController::class, 'login'])->name('login');
+ Route::post('/login', [FrontController::class, 'login_submit'])->name('login_submit');
  Route::get('/registration', [FrontController::class, 'registration'])->name('registration');
  Route::post('/registration', [FrontController::class, 'registration_submit'])->name('registration_submit');
- Route::get('/registration-verify/{token}/{email}', [FrontController::class, 'registration_verify'])->name('registration_verify');
+ Route::get('/registration-verify/{email}/{token}', [FrontController::class, 'registration_verify'])->name('registration_verify');
+  Route::get('/logout', [FrontController::class, 'logout'])->name('logout');
 
 
-// Admin 
+ // User or Attendee 
+
+Route::middleware('auth')->prefix('attendee')->group(function(){
+    // secrete pages then you can not have the access with out login
+  Route::get('/profile', [FrontController::class, 'profile'])->name('attendee_profile');
+  Route::post('/profile', [FrontController::class, 'profile_submit'])->name('attendee_profile_submit');
+  Route::get('/dashboard', [FrontController::class, 'dashboard'])->name('attendee_dashboard');
+
+
+});
+
+
+
+ 
+ // Admin 
 
 Route::middleware('admin')->prefix('admin')->group(function(){
     // secrete pages then you can not have the access with out login
