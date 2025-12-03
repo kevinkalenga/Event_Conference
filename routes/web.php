@@ -17,6 +17,7 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/forget-password', [FrontController::class, 'forget_password'])->name('forget_password');
  Route::post('/forget-password', [FrontController::class, 'forget_password_submit'])->name('forget_password_submit');
  Route::get('/reset-password/{token}/{email}', [FrontController::class, 'reset_password'])->name('reset_password');
+ Route::post('/reset-password/{token}/{email}', [FrontController::class, 'reset_password_submit'])->name('reset_password_submit');
 
 
  // User or Attendee 

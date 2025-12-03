@@ -149,4 +149,32 @@ class FrontController extends Controller
 
         return redirect()->back()->with('success','We have sent a password reset link to your email. Please check your email. If you do not find the email in your inbox, please check your spam folder.');
     } 
+
+
+    public function reset_password($token,$email)
+    {
+        $user = User::where('email',$email)->where('token',$token)->first();
+        if(!$user) {
+            return redirect()->route('login')->with('error','Token or email is not correct');
+        }
+        return view('front.reset-password', compact('token','email'));
+    }
+
+    public function reset_password_submit(Request $request, $token, $email)
+    {
+        $request->validate([
+            'password' => ['required'],
+            'confirm_password' => ['required','same:password'],
+        ]);
+
+        $user = User::where('email',$request->email)->where('token',$request->token)->first();
+        $user->password = Hash::make($request->password);
+        $user->token = "";
+        $user->update();
+
+        return redirect()->route('login')->with('success','Password reset is successful. You can login now.');
+    }
+
+
+
 }
