@@ -118,4 +118,35 @@ class FrontController extends Controller
        
        return view('attendee.profile');
     }
+
+    public function forget_password()
+    {
+        return view('front.forget_password');
+    }
+
+    public function forget_password_submit(Request $request)
+    {
+            $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        $user = User::where('email',$request->email)->first();
+        if(!$user) {
+            return redirect()->back()->with('error','Email is not found');
+        }
+         
+        // Generate a token
+        $token = hash('sha256',time());
+        $user->token = $token;
+        $user->save();
+
+        $reset_link = url('reset-password/'.$token.'/'.$request->email);
+        $subject = "Password Reset";
+        $message = "To reset password, please click on the link below:<br>";
+        $message .= "<a href='".$reset_link."'>Click Here</a>";
+
+        \Mail::to($request->email)->send(new Websitemail($subject,$message));
+
+        return redirect()->back()->with('success','We have sent a password reset link to your email. Please check your email. If you do not find the email in your inbox, please check your spam folder.');
+    } 
 }

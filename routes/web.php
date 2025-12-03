@@ -13,7 +13,10 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/registration', [FrontController::class, 'registration'])->name('registration');
  Route::post('/registration', [FrontController::class, 'registration_submit'])->name('registration_submit');
  Route::get('/registration-verify/{email}/{token}', [FrontController::class, 'registration_verify'])->name('registration_verify');
-  Route::get('/logout', [FrontController::class, 'logout'])->name('logout');
+ Route::get('/logout', [FrontController::class, 'logout'])->name('logout');
+ Route::get('/forget-password', [FrontController::class, 'forget_password'])->name('forget_password');
+ Route::post('/forget-password', [FrontController::class, 'forget_password_submit'])->name('forget_password_submit');
+ Route::get('/reset-password/{token}/{email}', [FrontController::class, 'reset_password'])->name('reset_password');
 
 
  // User or Attendee 
