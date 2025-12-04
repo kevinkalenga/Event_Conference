@@ -37,35 +37,35 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>Name: </th>
-                                    <td>Mister Smith</td>
+                                    <td>{{Auth::guard('web')->user()->name}}</td>
                                 </tr>
                                 <tr>
                                     <th>Email: </th>
-                                    <td>smith@gmail.com</td>
+                                    <td>{{Auth::guard('web')->user()->email}}</td>
                                 </tr>
                                 <tr>
                                     <th>Phone: </th>
-                                    <td>237-453-2264</td>
+                                    <td>{{Auth::guard('web')->user()->phone}}</td>
                                 </tr>
                                 <tr>
                                     <th>Address: </th>
-                                    <td>45 Sp Valley, NYC, USA</td>
+                                    <td>{{Auth::guard('web')->user()->address}}</td>
                                 </tr>
                                 <tr>
                                     <th>State: </th>
-                                    <td>NYC</td>
+                                    <td>{{Auth::guard('web')->user()->state}}</td>
                                 </tr>
                                 <tr>
                                     <th>City: </th>
-                                    <td>NYC</td>
+                                    <td>{{Auth::guard('web')->user()->city}}</td>
                                 </tr>
                                 <tr>
                                     <th>Country: </th>
-                                    <td>USA</td>
+                                    <td>{{Auth::guard('web')->user()->country}}</td>
                                 </tr>
                                 <tr>
                                     <th>Zip Code: </th>
-                                    <td>12873</td>
+                                    <td>{{Auth::guard('web')->user()->zip}}</td>
                                 </tr>
                             </table>
                         </div>
