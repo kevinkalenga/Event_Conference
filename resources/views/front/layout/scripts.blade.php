@@ -12,9 +12,9 @@
         <script src="{{asset('dist-front/js/typed.js')}}"></script> 
         <script src="{{asset('dist/js/iziToast.min.js')}}"></script> 
         <script src="{{asset('dist-front/js/custom.js')}}"></script>
-        <script>
+     <script>
             $(".countDown").downCount({
-                date: '08/25/2024 12:00:00', //month/date/year   HH:MM:SS
+                date: '08/25/2024 03:20:00', //month/date/year   HH:MM:SS
                 offset: +6 //+GMT
             });
-        </script>
+      </script>
