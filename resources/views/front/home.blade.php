@@ -15,30 +15,57 @@
                                 {!!$home_banner->text!!}
                               </p>
                             @endif
+                            
+                            @php  
+                            
+
+                               // Date actuelle
+                                $d1 = new DateTime();
+                               // Construction correcte de la date/heure de l'événement
+                               $eventDateTime = $home_banner->event_date . ' ' . $home_banner->event_time;
+
+                                // Création de l'objet DateTime
+                                $d2 = DateTime::createFromFormat('Y-m-d H:i:s', $eventDateTime);
+                                // Vérification au cas où la date serait mal formatée
+
+                                if($d2) {
+                                    $interval = $d1->diff($d2);
+
+                                    $days = $interval->days;
+                                    $hours = $interval->h;
+                                    $minutes = $interval->i;
+                                } else {
+                                    $days = $hours = $minutes = 0;
+                                }
+                                
+                            @endphp
+                              
+                            
+                            
                             <div class="counter-area">
                                 <div class="countDown clearfix">
                                     <div class="row count-down-bg">
                                         <div class="col-lg-3 col-sm-6 col-xs-12">
                                             <div class="single-count day">
-                                                <h1 class="days">46</h1>
+                                                <h1 class="days">0</h1>
                                                 <p class="days_ref">days</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-sm-6 col-xs-12">
                                             <div class="single-count hour">
-                                                <h1 class="hours">09</h1>
+                                                <h1 class="hours">0</h1>
                                                 <p class="hours_ref">hours</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-sm-6 col-xs-12">
                                             <div class="single-count min">
-                                                <h1 class="minutes">55</h1>
+                                                <h1 class="minutes">0</h1>
                                                 <p class="minutes_ref">minutes</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-sm-6 col-xs-12">
                                             <div class="single-count second">
-                                                <h1 class="seconds">02</h1>
+                                                <h1 class="seconds">0</h1>
                                                 <p class="seconds_ref">seconds</p>
                                             </div>
                                         </div>
@@ -354,6 +381,52 @@
             </div>
         </div>
 
-      
+     
+<!-- SCRIPT à placer après le compteur, avant </body> -->
+
+@php
+$eventDateTimeISO = null;
+if(!empty($home_banner->event_date) && !empty($home_banner->event_time)) {
+    // Carbon parse en format ISO 8601
+    $eventDateTimeISO = \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', $home_banner->event_date . ' ' . $home_banner->event_time)
+                        ->toIso8601String();
+}
+@endphp
+
+@if($eventDateTimeISO)
+<script>
+    const eventDate = new Date("{{ $eventDateTimeISO }}");
+
+    function updateCountdown() {
+        const now = new Date();
+        let diff = eventDate - now;
+        if(diff < 0) diff = 0;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        const selectors = {
+            days: document.querySelector(".days"),
+            hours: document.querySelector(".hours"),
+            minutes: document.querySelector(".minutes"),
+            seconds: document.querySelector(".seconds")
+        };
+
+        Object.entries({days, hours, minutes, seconds}).forEach(([key, value]) => {
+            if(selectors[key].textContent != value) {
+                selectors[key].textContent = value;
+                selectors[key].classList.add("flip");
+                setTimeout(() => selectors[key].classList.remove("flip"), 300);
+            }
+        });
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+@endif
+
 
 @endsection
