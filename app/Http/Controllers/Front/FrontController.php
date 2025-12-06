@@ -8,12 +8,14 @@ use App\Mail\Websitemail;
 use Hash;
 use Auth;
 use App\Models\User;
+use App\Models\HomeBanner;
 
 class FrontController extends Controller
 {
     public function home()
     {
-        return view('front.home');
+        $home_banner = HomeBanner::where('id', 1)->first();
+        return view('front.home', compact('home_banner'));
     }
     public function contact()
     {
