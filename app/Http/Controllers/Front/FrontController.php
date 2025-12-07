@@ -9,13 +9,15 @@ use Hash;
 use Auth;
 use App\Models\User;
 use App\Models\HomeBanner;
+use App\Models\HomeWelcome;
 
 class FrontController extends Controller
 {
     public function home()
     {
         $home_banner = HomeBanner::where('id', 1)->first();
-        return view('front.home', compact('home_banner'));
+        $home_welcome = HomeWelcome::where('id', 1)->first();
+        return view('front.home', compact('home_banner', 'home_welcome'));
     }
     public function contact()
     {

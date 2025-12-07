@@ -51,6 +51,7 @@ class AdminHomeWelcomeController extends Controller
        $home_welcome->description = $request->description;
        $home_welcome->button_text = $request->button_text;
        $home_welcome->button_link = $request->button_link;
+       $home_welcome->status = $request->status;
        $home_welcome->save();
 
        return redirect()->back()->with('success','Home Welcome is updated!');

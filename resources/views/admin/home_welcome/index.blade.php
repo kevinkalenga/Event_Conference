@@ -49,16 +49,25 @@
                                                     </textarea>
                                             </div>
                                              <div class="row">
-                                                 <div class="col-md-6">
+                                                 <div class="col-md-4">
                                                      <div class="mb-4">
                                                         <label class="form-label">Button Text</label>
                                                         <input type="text" class="form-control" name="button_text" value="{{$home_welcome->button_text}}">
                                                       </div>
                                                  </div>
-                                                 <div class="col-md-6">
+                                                 <div class="col-md-4">
                                                         <div class="mb-4">
                                                             <label class="form-label">Button Link</label>
                                                             <input type="text" class="form-control" name="button_link" value="{{$home_welcome->button_link}}">
+                                                        </div>
+                                                 </div>
+                                                 <div class="col-md-4">
+                                                        <div class="mb-4">
+                                                            <label class="form-label">Status</label>
+                                                            <select name="status"  class="form-select">
+                                                                <option value="Show" @if($home_welcome->status == 'Show') selected @endif>Show</option>
+                                                                <option value="Hide" @if($home_welcome->status == 'Hide') selected @endif>Hide</option>
+                                                            </select>
                                                         </div>
                                                  </div>
                                              </div>
