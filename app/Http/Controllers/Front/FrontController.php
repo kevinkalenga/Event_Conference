@@ -10,6 +10,7 @@ use Auth;
 use App\Models\User;
 use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
+use App\Models\HomeCounter;
 
 class FrontController extends Controller
 {
@@ -17,7 +18,8 @@ class FrontController extends Controller
     {
         $home_banner = HomeBanner::where('id', 1)->first();
         $home_welcome = HomeWelcome::where('id', 1)->first();
-        return view('front.home', compact('home_banner', 'home_welcome'));
+        $home_counter = HomeCounter::where('id', 1)->first();
+        return view('front.home', compact('home_banner', 'home_welcome', 'home_counter'));
     }
     public function contact()
     {

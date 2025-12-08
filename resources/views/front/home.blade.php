@@ -165,45 +165,46 @@
             </div>
         </div>
     
-    
-        <div id="counter-section" class="pt_70 pb_70" style="background-image: url({{asset('dist-front/images/counter-bg.jpg')}});">
+     @if($home_counter->status == 'Show')
+        <div id="counter-section" class="pt_70 pb_70" style="background-image: url({{asset('uploads/'.$home_counter->background)}});">
             <div class="container">
                 <div class="row number-counters text-center">
                     <div class="col-lg-3 col-sm-6 col-xs-12"> 
                         <div class="counters-item">
-                            <i class="fa fa-calendar"></i>
-                            <strong data-to="3">0</strong>
-                            <p>Days Event</p>
+                            
+                            <i class="{{$home_counter->item1_icon}}"></i>
+                            <strong data-to="{{$home_counter->item1_number}}">0</strong>
+                            <p>{{$home_counter->item1_title}}</p>
                         </div>
                     </div>
                     
                     <div class="col-lg-3 col-sm-6 col-xs-12"> 
                         <div class="counters-item">
-                        <i class="fa fa-user"></i>
-                            <strong data-to="8">0</strong>
-                            <p>Speakers</p>
+                        <i class="{{$home_counter->item2_icon}}"></i>
+                            <strong data-to="{{$home_counter->item2_number}}">0</strong>
+                            <p>{{$home_counter->item2_title}}</p>
                         </div>
                     </div>
                     
                     <div class="col-lg-3 col-sm-6 col-xs-12">
                         <div class="counters-item">
-                            <i class="fa fa-users"></i>
-                            <strong data-to="60">0</strong>
-                            <p>Members Registered</p>
+                            <i class="{{$home_counter->item3_icon}}"></i>
+                            <strong data-to="{{$home_counter->item3_number}}">0</strong>
+                            <p>{{$home_counter->item3_title}}</p>
                         </div>
                     </div>
                     
                     <div class="col-lg-3 col-sm-6 col-xs-12">
                         <div class="counters-item">
-                            <i class="fa fa-th-list"></i>
-                            <strong data-to="12">0</strong>
-                            <p>Sponsors</p>
+                            <i class="{{$home_counter->item4_icon}}"></i>
+                            <strong data-to="{{$home_counter->item4_number}}">0</strong>
+                            <p>{{$home_counter->item4_title}}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+    @endif    
     
         
         <div id="price-section" class="pt_70 pb_70 gray prices">

@@ -36,7 +36,26 @@ class AdminHomeCounterController extends Controller
       $home_counter = HomeCounter::where('id', 1)->first();
 
     
+        if ($request->hasFile('background')) {
+                 $request->validate([
+                     'background' => ['image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+                 ]);
 
+                 // Supprime l'ancienne photo seulement si ce n'est pas une photo par défaut
+                 $defaultPhotos = ['user.jpg', 'admin.jpeg', 'default.png'];
+                 if ($home_counter->background && !in_array($home_counter->background, $defaultPhotos) && file_exists(public_path('uploads/' . $home_counter->background))) {
+                     unlink(public_path('uploads/' .$home_counter->background));
+                 }
+
+                 // Sauvegarde la nouvelle photo
+                 $final_name = 'home_counter_' . time() . '.' . $request->background->extension();
+                 $request->background->move(public_path('uploads'), $final_name);
+                 $home_counter->background = $final_name;
+        }
+       
+      
+      
+      
        $home_counter->item1_icon = $request->item1_icon;
        $home_counter->item1_number = $request->item1_number;
        $home_counter->item1_title = $request->item1_title;
