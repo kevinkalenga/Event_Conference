@@ -17,7 +17,7 @@ class AdminHomeWelcomeController extends Controller
     
 
     public function update(Request $request) 
-{
+    {
       $request->validate([
         'heading' => ['required'],
         'description' => ['required'],
@@ -55,6 +55,6 @@ class AdminHomeWelcomeController extends Controller
        $home_welcome->save();
 
        return redirect()->back()->with('success','Home Welcome is updated!');
-}
+    }
 
 }
