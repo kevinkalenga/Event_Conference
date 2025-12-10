@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('speakers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->string('designation');
             $table->string('photo');
             $table->string('email')->unique();
             $table->string('phone');
-            $table->string('biography')->nullable();
+            $table->text('biography')->nullable();
             $table->string('address')->nullable();
             $table->string('website')->nullable();
             $table->string('facebook')->nullable();

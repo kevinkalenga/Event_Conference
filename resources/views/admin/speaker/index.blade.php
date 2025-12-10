@@ -16,7 +16,7 @@
                 <div class="section-header d-flex justify-content-between">
                     <h1>Speakers</h1>
                     <div>
-                      <a href="" class="btn btn-primary">Add New</a>
+                      <a href="{{route('admin_speaker_create')}}" class="btn btn-primary">Add New</a>
                     </div>
                 </div>
                 
