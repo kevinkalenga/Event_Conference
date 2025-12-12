@@ -55,6 +55,9 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/home-counter', [AdminHomeCounterController::class, 'update'])->name('admin_home_counter_update');
   Route::get('/speaker/index', [AdminSpeakerController::class, 'index'])->name('admin_speaker_index');
   Route::get('/speaker/create', [AdminSpeakerController::class, 'create'])->name('admin_speaker_create');
+  Route::get('/speaker/edit/{id}', [AdminSpeakerController::class, 'edit'])->name('admin_speaker_edit');
+  Route::post('/speaker/update/{id}', [AdminSpeakerController::class, 'update'])->name('admin_speaker_update');
+  Route::get('/speaker/delete/{id}', [AdminSpeakerController::class, 'delete'])->name('admin_speaker_delete');
   Route::post('/speaker/store', [AdminSpeakerController::class, 'store'])->name('admin_speaker_store');
 
 });

@@ -41,6 +41,7 @@
                                          </thead>
                                          <tbody>
                                             @foreach($speakers as $speaker)
+                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>
                                                     <img style="width: 100px;" src="{{asset('uploads/'.$speaker->photo)}}" alt="" class="w_100">
@@ -49,10 +50,11 @@
                                                 <td>{{$speaker->designation}}</td>
                                                 
                                                 <td>
-                                                    <a href="" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                    <a href=""
-                                                     class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i></a>
+                                                    <a href="{{route('admin_speaker_edit', $speaker->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <a href="{{route('admin_speaker_delete', $speaker->id)}}"
+                                                     class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i></a>
                                                 </td>
+                                             </tr>
                                             @endforeach
                                          </tbody>
                                       </table>
