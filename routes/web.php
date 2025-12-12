@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminHomeBannerController;
 use App\Http\Controllers\Admin\AdminHomeWelcomeController;
 use App\Http\Controllers\Admin\AdminHomeCounterController;
 use App\Http\Controllers\Admin\AdminSpeakerController;
+use App\Http\Controllers\Admin\AdminScheduleDayController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -55,12 +56,20 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/home-welcome', [AdminHomeWelcomeController::class, 'update'])->name('admin_home_welcome_update');
   Route::get('/home-counter', [AdminHomeCounterController::class, 'index'])->name('admin_home_counter');
   Route::post('/home-counter', [AdminHomeCounterController::class, 'update'])->name('admin_home_counter_update');
+  // Speaker
   Route::get('/speaker/index', [AdminSpeakerController::class, 'index'])->name('admin_speaker_index');
   Route::get('/speaker/create', [AdminSpeakerController::class, 'create'])->name('admin_speaker_create');
   Route::get('/speaker/edit/{id}', [AdminSpeakerController::class, 'edit'])->name('admin_speaker_edit');
   Route::post('/speaker/update/{id}', [AdminSpeakerController::class, 'update'])->name('admin_speaker_update');
   Route::get('/speaker/delete/{id}', [AdminSpeakerController::class, 'delete'])->name('admin_speaker_delete');
   Route::post('/speaker/store', [AdminSpeakerController::class, 'store'])->name('admin_speaker_store');
+  // Schedule Day
+  Route::get('/schedule-day/index', [AdminScheduleDayController::class, 'index'])->name('admin_schedule_day_index');
+  Route::get('/schedule-day/create', [AdminScheduleDayController::class, 'create'])->name('admin_schedule_day_create');
+  Route::get('/schedule-day/edit/{id}', [AdminScheduleDayController::class, 'edit'])->name('admin_schedule_day_edit');
+  Route::post('/schedule-day/update/{id}', [AdminScheduleDayController::class, 'update'])->name('admin_schedule_day_update');
+  Route::get('/schedule-day/delete/{id}', [AdminScheduleDayController::class, 'delete'])->name('admin_schedule_day_delete');
+  Route::post('/schedule-day/store', [AdminScheduleDayController::class, 'store'])->name('admin_schedule_day_store');
 
 });
 
