@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
+use App\Models\Speaker;
 
 class FrontController extends Controller
 {
@@ -19,8 +20,29 @@ class FrontController extends Controller
         $home_banner = HomeBanner::where('id', 1)->first();
         $home_welcome = HomeWelcome::where('id', 1)->first();
         $home_counter = HomeCounter::where('id', 1)->first();
-        return view('front.home', compact('home_banner', 'home_welcome', 'home_counter'));
+        $speakers = Speaker::get()->take(4);
+        return view('front.home', compact('home_banner', 'home_welcome', 'home_counter', 'speakers'));
     }
+    
+    public function speaker($slug)
+    {
+      $speaker = Speaker::where('slug', $slug)->first();
+      if(!$speaker) {
+        return redirect()->route('speakers');
+      }
+      return view('front.speaker', compact('speaker'));
+    }
+    
+    
+    
+    public function speakers()
+    {
+        $speakers = Speaker::get();
+        return view('front.speakers', compact('speakers'));
+    }
+    
+    
+    
     public function contact()
     {
         return view('front.contact');
