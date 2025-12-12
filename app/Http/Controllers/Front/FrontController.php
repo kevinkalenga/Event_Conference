@@ -12,6 +12,7 @@ use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
 use App\Models\Speaker;
+use App\Models\ScheduleDay;
 
 class FrontController extends Controller
 {
@@ -23,6 +24,14 @@ class FrontController extends Controller
         $speakers = Speaker::get()->take(4);
         return view('front.home', compact('home_banner', 'home_welcome', 'home_counter', 'speakers'));
     }
+    
+    public function schedule()
+    {
+        $schedule_days = ScheduleDay::orderBy('order1', 'asc')->get();
+        return view('front.schedule', compact('schedule_days'));
+    }
+    
+    
     
     public function speaker($slug)
     {

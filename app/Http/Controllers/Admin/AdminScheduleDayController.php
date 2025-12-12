@@ -10,7 +10,7 @@ class AdminScheduleDayController extends Controller
 {
     public function index()
     {
-      $schedule_days = ScheduleDay::get();
+      $schedule_days = ScheduleDay::orderBy('order1', 'asc')->get();
       return view('admin.schedule_day.index', compact('schedule_days'));
     }
 
