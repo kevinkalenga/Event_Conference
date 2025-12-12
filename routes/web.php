@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminHomeWelcomeController;
 use App\Http\Controllers\Admin\AdminHomeCounterController;
 use App\Http\Controllers\Admin\AdminSpeakerController;
 use App\Http\Controllers\Admin\AdminScheduleDayController;
+use App\Http\Controllers\Admin\AdminScheduleController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -71,6 +72,13 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/schedule-day/update/{id}', [AdminScheduleDayController::class, 'update'])->name('admin_schedule_day_update');
   Route::get('/schedule-day/delete/{id}', [AdminScheduleDayController::class, 'delete'])->name('admin_schedule_day_delete');
   Route::post('/schedule-day/store', [AdminScheduleDayController::class, 'store'])->name('admin_schedule_day_store');
+  // Schedule
+  Route::get('/schedule/index', [AdminScheduleController::class, 'index'])->name('admin_schedule_index');
+  Route::get('/schedule/create', [AdminScheduleController::class, 'create'])->name('admin_schedule_create');
+  Route::get('/schedule/edit/{id}', [AdminScheduleController::class, 'edit'])->name('admin_schedule_edit');
+  Route::post('/schedule/update/{id}', [AdminScheduleController::class, 'update'])->name('admin_schedule_update');
+  Route::get('/schedule/delete/{id}', [AdminScheduleController::class, 'delete'])->name('admin_schedule_delete');
+  Route::post('/schedule/store', [AdminScheduleController::class, 'store'])->name('admin_schedule_store');
 
 });
 
