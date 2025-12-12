@@ -57,60 +57,30 @@ class AdminScheduleDayController extends Controller
     
     public function edit($id)
     {
-      $speaker = Speaker::where('id', $id)->first();
-      return view('admin.speaker.edit', compact('speaker'));
+      $schedule_day = ScheduleDay::where('id', $id)->first();
+      return view('admin.schedule_day.edit', compact('schedule_day'));
     }
     public function update(Request $request, $id)
     {
-        $speaker = Speaker::where('id', $id)->first();
+        $schedule_day = ScheduleDay::where('id', $id)->first();
       
        $request->validate([
         
-        'name' => ['required'],
-        'slug' => ['required', 'alpha_dash', 'regex:/^[a-zA-Z-]+$/', Rule::unique('speakers')->ignore($id)],
-        'designation' => ['required'],
-        'email' => ['required', 'email', Rule::unique('speakers')->ignore($id)],
-        'phone' => ['required', Rule::unique('speakers')->ignore($id)],
+          
+        'day' => ['required'],
+        'date1' => ['required'],
+        'order1' => ['required'],
       ]);
 
-       if ($request->hasFile('photo')) {
-          $request->validate([
-              'photo' => ['image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
-          ]);
+      
 
-          // Photos par défaut à ne pas supprimer
-          $defaultPhotos = ['user.jpg', 'admin.jpeg', 'default.png'];
+       $schedule_day->day = $request->day;
+       $schedule_day->date1 = $request->date1;
+       $schedule_day->order1 = $request->order1;
 
-          // Supprimer l'ancienne photo si elle existe et n'est pas par défaut
-          if ($speaker->photo &&
-              !in_array($speaker->photo, $defaultPhotos) &&
-              file_exists(public_path('uploads/' . $speaker->photo))) {
-
-              unlink(public_path('uploads/' . $speaker->photo));
-          }
-
-           // Nouvelle photo
-           $final_name = 'speaker_' . time() . '.' . $request->photo->extension();
-           $request->photo->move(public_path('uploads'), $final_name);
-           $speaker->photo = $final_name;
-       }
-
-       $speaker->name = $request->name;
-       $speaker->slug = $request->slug;
-       $speaker->designation = $request->designation;
-       $speaker->email = $request->email;
-       $speaker->phone = $request->phone;
-       $speaker->biography = $request->biography;
-       $speaker->address = $request->address;
-       $speaker->website = $request->website;
-       $speaker->facebook = $request->facebook;
-       $speaker->twitter = $request->twitter;
-       $speaker->linkedin = $request->linkedin;
-       $speaker->instagram = $request->instagram;
-
-       $speaker->save();
+       $schedule_day->save();
     
-       return redirect()->route('admin_speaker_index')->with('success','Speaker Updated successfully!');
+       return redirect()->route('admin_schedule_day_index')->with('success','Schedule Day Updated successfully!');
     
     }
     
@@ -118,16 +88,14 @@ class AdminScheduleDayController extends Controller
     
    public function delete($id) 
     {
-         $speaker = Speaker::where('id', $id)->first();
+         $schedule = ScheduleDay::where('id', $id)->first();
 
-         if ($speaker->photo && file_exists(public_path('uploads/'.$speaker->photo))) {
-             unlink(public_path('uploads/'.$speaker->photo));
-         }
+        
 
-         $speaker->delete();
+         $schedule->delete();
 
-         return redirect()->route('admin_speaker_index')
-                     ->with('success', 'Speaker is Deleted Successfully');
+         return redirect()->route('admin_schedule_day_index')
+                     ->with('success', 'Schedule Day is Deleted Successfully');
     }
 
 }
