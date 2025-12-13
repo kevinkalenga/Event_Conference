@@ -103,25 +103,54 @@ class AdminScheduleController extends Controller
     
     public function update(Request $request, $id)
     {
-        $schedule_day = ScheduleDay::where('id', $id)->first();
+        $schedule = Schedule::where('id', $id)->first();
       
        $request->validate([
-        
-          
-        'day' => ['required'],
-        'date1' => ['required'],
-        'order1' => ['required'],
+          'name' => ['required'],
+          'title' => ['required'],
+          'photo' => ['image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+          'description' => ['required'],
+          'location' => ['required'],
+          'time' => ['required'],
+          'item_order' => ['required', 'integer'],
       ]);
+
+
+       if ($request->hasFile('photo')) {
+          $request->validate([
+              'photo' => ['image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+          ]);
+
+          // Photos par défaut à ne pas supprimer
+          $defaultPhotos = ['user.jpg', 'admin.jpeg', 'default.png'];
+
+          // Supprimer l'ancienne photo si elle existe et n'est pas par défaut
+          if ($schedule->photo &&
+              !in_array($schedule->photo, $defaultPhotos) &&
+              file_exists(public_path('uploads/' . $schedule->photo))) {
+
+              unlink(public_path('uploads/' . $schedule->photo));
+          }
+
+           // Nouvelle photo
+           $final_name = 'schedule_' . time() . '.' . $request->photo->extension();
+           $request->photo->move(public_path('uploads'), $final_name);
+           $schedule->photo = $final_name;
+       }
 
       
 
-       $schedule_day->day = $request->day;
-       $schedule_day->date1 = $request->date1;
-       $schedule_day->order1 = $request->order1;
+       $schedule->schedule_day_id = $request->schedule_day_id;
+       $schedule->name = $request->name;
+       $schedule->title = $request->title;
+       $schedule->description = $request->description;
+       $schedule->location = $request->location;
+       $schedule->time = $request->time;
+       $schedule->item_order = $request->item_order;
 
-       $schedule_day->save();
+       $schedule->save();
     
-       return redirect()->route('admin_schedule_day_index')->with('success','Schedule Day Updated successfully!');
+       return redirect()->route('admin_schedule_index')->with('success','Schedule Updated successfully!');
     
     }
     
@@ -129,9 +158,11 @@ class AdminScheduleController extends Controller
     
     public function delete($id) 
     {
-         $schedule = ScheduleDay::where('id', $id)->first();
+         $schedule = Schedule::where('id', $id)->first();
 
-        
+         if ($schedule->photo && file_exists(public_path('uploads/'.$schedule->photo))) {
+             unlink(public_path('uploads/'.$schedule->photo));
+         }
 
          $schedule->delete();
 
