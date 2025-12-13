@@ -27,7 +27,8 @@ class FrontController extends Controller
     
     public function schedule()
     {
-        $schedule_days = ScheduleDay::orderBy('order1', 'asc')->get();
+        // relationship
+        $schedule_days = ScheduleDay::with('schedules')->orderBy('order1', 'asc')->get();
         return view('front.schedule', compact('schedule_days'));
     }
     
