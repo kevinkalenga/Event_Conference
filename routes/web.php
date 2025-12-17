@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminHomeCounterController;
 use App\Http\Controllers\Admin\AdminSpeakerController;
 use App\Http\Controllers\Admin\AdminScheduleDayController;
 use App\Http\Controllers\Admin\AdminScheduleController;
+use App\Http\Controllers\Admin\AdminSpeakerScheduleController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -79,6 +80,10 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/schedule/update/{id}', [AdminScheduleController::class, 'update'])->name('admin_schedule_update');
   Route::get('/schedule/delete/{id}', [AdminScheduleController::class, 'delete'])->name('admin_schedule_delete');
   Route::post('/schedule/store', [AdminScheduleController::class, 'store'])->name('admin_schedule_store');
+
+  // speaker schedule 
+   Route::get('/speaker-schedule/index', [AdminSpeakerScheduleController::class, 'index'])->name('admin_speaker_schedule_index');
+   Route::post('/speaker-schedule/store', [AdminSpeakerScheduleController::class, 'store'])->name('admin_speaker_schedule_store');
 
 });
 
