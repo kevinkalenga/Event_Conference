@@ -84,6 +84,7 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   // speaker schedule 
    Route::get('/speaker-schedule/index', [AdminSpeakerScheduleController::class, 'index'])->name('admin_speaker_schedule_index');
    Route::post('/speaker-schedule/store', [AdminSpeakerScheduleController::class, 'store'])->name('admin_speaker_schedule_store');
+   Route::get('/speaker-schedule/delete/{id}', [AdminSpeakerScheduleController::class, 'delete'])->name('admin_speaker_schedule_delete');
 
 });
 
