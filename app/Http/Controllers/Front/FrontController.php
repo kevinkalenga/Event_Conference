@@ -40,7 +40,10 @@ class FrontController extends Controller
       if(!$speaker) {
         return redirect()->route('speakers');
       }
-      return view('front.speaker', compact('speaker'));
+     
+      //   relation between speaker and schedule with schedule_day
+      $schedules = $speaker->schedules()->with('schedule_day')->get();
+      return view('front.speaker', compact('speaker', 'schedules'));
     }
     
     
