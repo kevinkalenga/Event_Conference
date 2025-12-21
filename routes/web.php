@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminSpeakerController;
 use App\Http\Controllers\Admin\AdminScheduleDayController;
 use App\Http\Controllers\Admin\AdminScheduleController;
 use App\Http\Controllers\Admin\AdminSpeakerScheduleController;
+use App\Http\Controllers\Admin\AdminSponsorCategoryController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -85,6 +86,14 @@ Route::middleware('admin')->prefix('admin')->group(function(){
    Route::get('/speaker-schedule/index', [AdminSpeakerScheduleController::class, 'index'])->name('admin_speaker_schedule_index');
    Route::post('/speaker-schedule/store', [AdminSpeakerScheduleController::class, 'store'])->name('admin_speaker_schedule_store');
    Route::get('/speaker-schedule/delete/{id}', [AdminSpeakerScheduleController::class, 'delete'])->name('admin_speaker_schedule_delete');
+  
+  // Sponsor Category
+  Route::get('/sponsor-category/index', [AdminSponsorCategoryController::class, 'index'])->name('admin_sponsor_category_index');
+  Route::get('/sponsor-category/create', [AdminSponsorCategoryController::class, 'create'])->name('admin_sponsor_category_create');
+  Route::get('/sponsor-category/edit/{id}', [AdminSponsorCategoryController::class, 'edit'])->name('admin_sponsor_category_edit');
+  Route::post('/sponsor-category/update/{id}', [AdminSponsorCategoryController::class, 'update'])->name('admin_sponsor_category_update');
+  Route::get('/sponsor-category/delete/{id}', [AdminSponsorCategoryController::class, 'delete'])->name('admin_sponsor_category_delete');
+  Route::post('/sponsor-category/store', [AdminSponsorCategoryController::class, 'store'])->name('admin_sponsor_category_store');
 
 });
 
