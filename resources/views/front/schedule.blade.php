@@ -57,8 +57,11 @@
                                             </p>
                                             <h3>Speakers:</h3>
                                             <h4> 
-                                                <a href="speaker.html" class="badge badge-primary">John Smith</a> 
-                                                <a href="speaker.html" class="badge badge-primary">Pat Flynn</a>
+                                              @forelse($schedule->speakers as $speaker)
+                                                <a href="{{route('speaker', $speaker->slug)}}" class="badge badge-primary">{{$speaker->name}}</a> 
+                                              @empty 
+                                                <span class="text-danger">No Speaker is found.</span>
+                                              @endforelse
                                             </h4>
                                             <h3>Location:</h3>
                                             <h4> 

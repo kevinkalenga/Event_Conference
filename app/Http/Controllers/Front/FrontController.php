@@ -28,7 +28,10 @@ class FrontController extends Controller
     public function schedule()
     {
         // relationship
-        $schedule_days = ScheduleDay::with('schedules')->orderBy('order1', 'asc')->get();
+        $schedule_days = ScheduleDay::with(['schedules'=> function($query) {
+          $query->with('speakers');
+        }])->orderBy('order1', 'asc')->get();
+        
         return view('front.schedule', compact('schedule_days'));
     }
     
