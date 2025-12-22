@@ -13,6 +13,7 @@ use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
 use App\Models\Speaker;
 use App\Models\ScheduleDay;
+use App\Models\SponsorCategory;
 
 class FrontController extends Controller
 {
@@ -271,6 +272,12 @@ class FrontController extends Controller
         $user->update();
 
         return redirect()->route('login')->with('success','Password reset is successful. You can login now.');
+    }
+
+    public function sponsors() 
+    {
+        $sponsor_categories = SponsorCategory::get();
+        return view('front.sponsors', compact('sponsor_categories'));
     }
 
 
