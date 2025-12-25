@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sponsor_catagory_id')->constrained('sponsor_categories')->onDelete('cascade');
+            $table->foreignId('sponsor_category_id')->constrained('sponsor_categories')->onDelete('cascade');
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('tagline');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('instagram')->nullable();
-            $table->string('map')->nullable();
+            $table->text('map')->nullable();
             $table->timestamps();
         });
     }
