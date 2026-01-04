@@ -12,6 +12,7 @@ use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
 use App\Models\Speaker;
+use App\Models\Sponsor;
 use App\Models\ScheduleDay;
 use App\Models\SponsorCategory;
 
@@ -276,8 +277,16 @@ class FrontController extends Controller
 
     public function sponsors() 
     {
-        $sponsor_categories = SponsorCategory::get();
+        $sponsor_categories = SponsorCategory::with('sponsors')->get();
         return view('front.sponsors', compact('sponsor_categories'));
+    }
+    public function sponsor($slug) 
+    {
+        $sponsor = Sponsor::where('slug', $slug)->first();
+        if(!$sponsor) {
+            return redirect()->route('sponsors');
+        }
+        return view('front.sponsor', compact('sponsor'));
     }
 
 
