@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminScheduleController;
 use App\Http\Controllers\Admin\AdminSpeakerScheduleController;
 use App\Http\Controllers\Admin\AdminSponsorCategoryController;
 use App\Http\Controllers\Admin\AdminSponsorController;
+use App\Http\Controllers\Admin\AdminOrganiserController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -104,6 +105,13 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/sponsor/update/{id}', [AdminSponsorController::class, 'update'])->name('admin_sponsor_update');
   Route::get('/sponsor/delete/{id}', [AdminSponsorController::class, 'delete'])->name('admin_sponsor_delete');
   Route::post('/sponsor/store', [AdminSponsorController::class, 'store'])->name('admin_sponsor_store');
+  // Organiser
+  Route::get('/organiser/index', [AdminOrganiserController::class, 'index'])->name('admin_organiser_index');
+  Route::get('/organiser/create', [AdminOrganiserController::class, 'create'])->name('admin_organiser_create');
+  Route::get('/organiser/edit/{id}', [AdminOrganiserController::class, 'edit'])->name('admin_organiser_edit');
+  Route::post('/organiser/update/{id}', [AdminOrganiserController::class, 'update'])->name('admin_organiser_update');
+  Route::get('/organiser/delete/{id}', [AdminOrganiserController::class, 'delete'])->name('admin_organiser_delete');
+  Route::post('/organiser/store', [AdminOrganiserController::class, 'store'])->name('admin_organiser_store');
 
 });
 

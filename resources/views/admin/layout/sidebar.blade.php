@@ -35,10 +35,23 @@
                         <i class="fas fa-hand-point-right"></i> <span>Schedule</span></a></li>
                      <li class="{{ Request::is('admin/speaker-schedule/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_speaker_schedule_index')}}">
                         <i class="fas fa-hand-point-right"></i> <span>Speaker Schedules</span></a></li>
-                     <li class="{{ Request::is('admin/sponsor-category/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_sponsor_category_index')}}">
+                     <!-- <li class="{{ Request::is('admin/sponsor-category/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_sponsor_category_index')}}">
                         <i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
                      <li class="{{ Request::is('admin/sponsor/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_sponsor_index')}}">
-                        <i class="fas fa-hand-point-right"></i> <span>Sponsors</span></a></li>
+                        <i class="fas fa-hand-point-right"></i> <span>Sponsors</span></a></li> -->
+                     
+                     <li class="nav-item dropdown {{ Request::is('admin/sponsor-category/*') || 
+                       Request::is('admin/sponsor/*') ? 'active': '' }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Sponsor Section</span></a>
+                        <ul class="dropdown-menu">
+                            <li class="{{ Request::is('admin/sponsor-category/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_sponsor_category_index')}}"><i class="fas fa-angle-right"></i>Sponsor Categories</a></li>
+                            <li class="{{ Request::is('admin/sponsor/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_sponsor_index')}}"><i class="fas fa-angle-right"></i>Sponsors</a></li>
+                        </ul>
+                    </li>
+                     
+                     
+                     <li class="{{ Request::is('admin/organiser/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_organiser_index')}}">
+                        <i class="fas fa-hand-point-right"></i> <span>Organisers</span></a></li>
 
                     
 
