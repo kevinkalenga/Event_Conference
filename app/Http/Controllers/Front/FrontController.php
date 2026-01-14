@@ -12,6 +12,7 @@ use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
 use App\Models\Speaker;
+use App\Models\Organiser;
 use App\Models\Sponsor;
 use App\Models\ScheduleDay;
 use App\Models\SponsorCategory;
@@ -51,13 +52,29 @@ class FrontController extends Controller
       return view('front.speaker', compact('speaker', 'schedules'));
     }
     
-    
-    
     public function speakers()
     {
         $speakers = Speaker::get();
         return view('front.speakers', compact('speakers'));
     }
+    
+    
+    public function organiser($slug)
+    {
+      $organiser = Organiser::where('slug', $slug)->first();
+      if(!$organiser) {
+        return redirect()->route('organisers');
+      }
+     
+      return view('front.organiser', compact('organiser'));
+    }
+
+    public function organisers()
+    {
+        $organisers = Organiser::get();
+        return view('front.organisers', compact('organisers'));
+    }
+    
     
     
     

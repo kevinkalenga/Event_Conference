@@ -25,6 +25,8 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/schedule', [FrontController::class, 'schedule'])->name('schedule');
  Route::get('/sponsors', [FrontController::class, 'sponsors'])->name('sponsors');
  Route::get('/sponsor/{slug}', [FrontController::class, 'sponsor'])->name('sponsor');
+ Route::get('/organisers', [FrontController::class, 'organisers'])->name('organisers');
+ Route::get('/organiser/{slug}', [FrontController::class, 'organiser'])->name('organiser');
  Route::get('/login', [FrontController::class, 'login'])->name('login');
  Route::post('/login', [FrontController::class, 'login_submit'])->name('login_submit');
  Route::get('/registration', [FrontController::class, 'registration'])->name('registration');

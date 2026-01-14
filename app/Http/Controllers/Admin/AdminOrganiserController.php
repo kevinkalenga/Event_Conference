@@ -62,5 +62,80 @@ class AdminOrganiserController extends Controller
       return redirect()->route('admin_organiser_index')->with('success','Organiser Created successfully!');
     }
 
+
+
+    public function edit($id)
+    {
+      $organiser = Organiser::where('id', $id)->first();
+      return view('admin.organiser.edit', compact('organiser'));
+    }
+    public function update(Request $request, $id)
+    {
+        $organiser = Organiser::where('id', $id)->first();
+      
+       $request->validate([
+        'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+        'name' => ['required'],
+        'slug' => ['required', 'alpha_dash', 'regex:/^[a-zA-Z-]+$/', Rule::unique('organisers')->ignore($id)],
+        'designation' => ['required'],
+      
+      ]);
+
+       if ($request->hasFile('photo')) {
+          $request->validate([
+              'photo' => ['image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+          ]);
+
+          // Photos par défaut à ne pas supprimer
+          $defaultPhotos = ['user.jpg', 'admin.jpeg', 'default.png'];
+
+          // Supprimer l'ancienne photo si elle existe et n'est pas par défaut
+          if ($organiser->photo &&
+              !in_array($organiser->photo, $defaultPhotos) &&
+              file_exists(public_path('uploads/' . $organiser->photo))) {
+
+              unlink(public_path('uploads/' . $organiser->photo));
+          }
+
+           // Nouvelle photo
+           $final_name = 'organiser_' . time() . '.' . $request->photo->extension();
+           $request->photo->move(public_path('uploads'), $final_name);
+           $organiser->photo = $final_name;
+       }
+
+       $organiser->name = $request->name;
+       $organiser->slug = $request->slug;
+       $organiser->designation = $request->designation;
+       $organiser->email = $request->email;
+       $organiser->phone = $request->phone;
+       $organiser->biography = $request->biography;
+       $organiser->address = $request->address;
+       $organiser->facebook = $request->facebook;
+       $organiser->twitter = $request->twitter;
+       $organiser->linkedin = $request->linkedin;
+       $organiser->instagram = $request->instagram;
+
+       $organiser->save();
+    
+       return redirect()->route('admin_organiser_index')->with('success','Organiser Updated successfully!');
+    
+    }
+
+
+    public function delete($id) 
+    {
+         $organiser = Organiser::where('id', $id)->first();
+
+         if ($organiser->photo && file_exists(public_path('uploads/'.$organiser->photo))) {
+             unlink(public_path('uploads/'.$organiser->photo));
+         }
+
+         $organiser->delete();
+
+         return redirect()->route('admin_organiser_index')
+                     ->with('success', 'Organiser is Deleted Successfully');
+    }
+    
+
     
 }
