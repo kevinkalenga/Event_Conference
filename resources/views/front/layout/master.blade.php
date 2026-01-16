@@ -34,7 +34,7 @@
                                                 <li><a href="{{route('home')}}">Home</a></li>
                                                 <li><a href="{{route('sponsors')}}">Sponsors</a></li>
                                                 <li><a href="{{route('speakers')}}">Speakers</a></li>
-                                                <li><a href="organizers.html">Organizers</a></li>
+                                                <li><a href="{{route('organisers')}}">Organizers</a></li>
                                             </ul>
                                         </div>
                                     </div>

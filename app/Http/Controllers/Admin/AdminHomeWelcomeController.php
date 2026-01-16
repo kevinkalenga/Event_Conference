@@ -25,7 +25,7 @@ class AdminHomeWelcomeController extends Controller
 
       $home_welcome = HomeWelcome::where('id', 1)->first();
 
-      if ($request->hasFile('photo')) {
+        if ($request->hasFile('photo')) {
           $request->validate([
               'photo' => ['image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
           ]);
@@ -45,7 +45,7 @@ class AdminHomeWelcomeController extends Controller
            $final_name = 'home_welcome_' . time() . '.' . $request->photo->extension();
            $request->photo->move(public_path('uploads'), $final_name);
            $home_welcome->photo = $final_name;
-       }
+        }
 
        $home_welcome->heading = $request->heading;
        $home_welcome->description = $request->description;
