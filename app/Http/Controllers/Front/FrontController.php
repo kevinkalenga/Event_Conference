@@ -14,6 +14,7 @@ use App\Models\HomeCounter;
 use App\Models\Speaker;
 use App\Models\Organiser;
 use App\Models\Sponsor;
+use App\Models\Accomodation;
 use App\Models\ScheduleDay;
 use App\Models\SponsorCategory;
 
@@ -304,6 +305,11 @@ class FrontController extends Controller
             return redirect()->route('sponsors');
         }
         return view('front.sponsor', compact('sponsor'));
+    }
+    public function accomodations() 
+    {
+         $accomodations = Accomodation::get();
+         return view('front.accomodations', compact('accomodations'));
     }
 
 
