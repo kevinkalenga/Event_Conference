@@ -17,6 +17,7 @@ use App\Models\Sponsor;
 use App\Models\Accomodation;
 use App\Models\ScheduleDay;
 use App\Models\SponsorCategory;
+use App\Models\Photo;
 
 class FrontController extends Controller
 {
@@ -310,6 +311,11 @@ class FrontController extends Controller
     {
          $accomodations = Accomodation::get();
          return view('front.accomodations', compact('accomodations'));
+    }
+    public function photo_gallery() 
+    {
+         $photos = Photo::paginate(6);
+         return view('front.photo_gallery', compact('photos'));
     }
 
 
