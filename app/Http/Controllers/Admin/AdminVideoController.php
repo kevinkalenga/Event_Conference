@@ -34,7 +34,7 @@ class AdminVideoController extends Controller
 
 
       // Assign fields
-      $video->video = $request->video;
+      $video->caption = $request->caption;
       $video->video = $request->video;
   
 
@@ -70,7 +70,7 @@ class AdminVideoController extends Controller
 
     public function delete($id) 
     {
-         $videoDelete = Photo::where('id', $id)->first();
+         $videoDelete = Video::where('id', $id)->first();
 
          if ($videoDelete->video && file_exists(public_path('uploads/'.$videoDelete->video))) {
              unlink(public_path('uploads/'.$videoDelete->video));

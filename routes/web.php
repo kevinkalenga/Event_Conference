@@ -32,6 +32,7 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/organiser/{slug}', [FrontController::class, 'organiser'])->name('organiser');
  Route::get('/accomodations', [FrontController::class, 'accomodations'])->name('accomodations');
  Route::get('/photo-gallery', [FrontController::class, 'photo_gallery'])->name('photo_gallery');
+ Route::get('/video-gallery', [FrontController::class, 'video_gallery'])->name('video_gallery');
  Route::get('/login', [FrontController::class, 'login'])->name('login');
  Route::post('/login', [FrontController::class, 'login_submit'])->name('login_submit');
  Route::get('/registration', [FrontController::class, 'registration'])->name('registration');

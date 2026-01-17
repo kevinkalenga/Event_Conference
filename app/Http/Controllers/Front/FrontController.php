@@ -18,6 +18,7 @@ use App\Models\Accomodation;
 use App\Models\ScheduleDay;
 use App\Models\SponsorCategory;
 use App\Models\Photo;
+use App\Models\Video;
 
 class FrontController extends Controller
 {
@@ -316,6 +317,11 @@ class FrontController extends Controller
     {
          $photos = Photo::paginate(6);
          return view('front.photo_gallery', compact('photos'));
+    }
+    public function video_gallery() 
+    {
+         $videos = Video::paginate(6);
+         return view('front.video_gallery', compact('videos'));
     }
 
 
