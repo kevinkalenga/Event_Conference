@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminSponsorCategoryController;
 use App\Http\Controllers\Admin\AdminSponsorController;
 use App\Http\Controllers\Admin\AdminOrganiserController;
 use App\Http\Controllers\Admin\AdminAccomodationController;
+use App\Http\Controllers\Admin\AdminPhotoController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -123,6 +124,13 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/accomodation/update/{id}', [AdminAccomodationController::class, 'update'])->name('admin_accomodation_update');
   Route::get('/accomodation/delete/{id}', [AdminAccomodationController::class, 'delete'])->name('admin_accomodation_delete');
   Route::post('/accomodation/store', [AdminAccomodationController::class, 'store'])->name('admin_accomodation_store');
+  // Photo Gallery
+  Route::get('/photo/index', [AdminPhotoController::class, 'index'])->name('admin_photo_index');
+  Route::get('/photo/create', [AdminPhotoController::class, 'create'])->name('admin_photo_create');
+  Route::get('/photo/edit/{id}', [AdminPhotoController::class, 'edit'])->name('admin_photo_edit');
+  Route::post('/photo/update/{id}', [AdminPhotoController::class, 'update'])->name('admin_photo_update');
+  Route::get('/photo/delete/{id}', [AdminPhotoController::class, 'delete'])->name('admin_photo_delete');
+  Route::post('/photo/store', [AdminPhotoController::class, 'store'])->name('admin_photo_store');
 
 });
 
