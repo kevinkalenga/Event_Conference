@@ -20,6 +20,7 @@ use App\Models\SponsorCategory;
 use App\Models\Photo;
 use App\Models\Video;
 use App\Models\Faq;
+use App\Models\Testimonial;
 
 class FrontController extends Controller
 {
@@ -328,6 +329,11 @@ class FrontController extends Controller
     {
          $faqs = Faq::get();
          return view('front.faq', compact('faqs'));
+    }
+    public function testimonial() 
+    {
+         $testimonials = Testimonial::get();
+         return view('front.testimonial', compact('testimonials'));
     }
 
 

@@ -36,6 +36,7 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/photo-gallery', [FrontController::class, 'photo_gallery'])->name('photo_gallery');
  Route::get('/video-gallery', [FrontController::class, 'video_gallery'])->name('video_gallery');
  Route::get('/faq', [FrontController::class, 'faq'])->name('faq');
+ Route::get('/testimonial', [FrontController::class, 'testimonial'])->name('testimonial');
  Route::get('/login', [FrontController::class, 'login'])->name('login');
  Route::post('/login', [FrontController::class, 'login_submit'])->name('login_submit');
  Route::get('/registration', [FrontController::class, 'registration'])->name('registration');
