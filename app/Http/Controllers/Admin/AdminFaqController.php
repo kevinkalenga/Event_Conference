@@ -56,7 +56,13 @@ class AdminFaqController extends Controller
     {
         $faq = Faq::where('id', $id)->first();
       
-
+        $request->validate([
+        'question' => ['required'],
+        'answer' => ['required'],
+       
+       
+        
+      ]);
        
 
        // Assign fields

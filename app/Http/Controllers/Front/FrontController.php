@@ -19,6 +19,7 @@ use App\Models\ScheduleDay;
 use App\Models\SponsorCategory;
 use App\Models\Photo;
 use App\Models\Video;
+use App\Models\Faq;
 
 class FrontController extends Controller
 {
@@ -322,6 +323,11 @@ class FrontController extends Controller
     {
          $videos = Video::paginate(6);
          return view('front.video_gallery', compact('videos'));
+    }
+    public function faq() 
+    {
+         $faqs = Faq::get();
+         return view('front.faq', compact('faqs'));
     }
 
 
