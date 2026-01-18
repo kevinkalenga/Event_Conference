@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\AdminOrganiserController;
 use App\Http\Controllers\Admin\AdminAccomodationController;
 use App\Http\Controllers\Admin\AdminPhotoController;
 use App\Http\Controllers\Admin\AdminVideoController;
+use App\Http\Controllers\Admin\AdminFaqController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -141,6 +142,13 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/video/update/{id}', [AdminVideoController::class, 'update'])->name('admin_video_update');
   Route::get('/video/delete/{id}', [AdminVideoController::class, 'delete'])->name('admin_video_delete');
   Route::post('/video/store', [AdminVideoController::class, 'store'])->name('admin_video_store');
+  // Faq
+  Route::get('/faq/index', [AdminFaqController::class, 'index'])->name('admin_faq_index');
+  Route::get('/faq/create', [AdminFaqController::class, 'create'])->name('admin_faq_create');
+  Route::get('/faq/edit/{id}', [AdminFaqController::class, 'edit'])->name('admin_faq_edit');
+  Route::post('/faq/update/{id}', [AdminFaqController::class, 'update'])->name('admin_faq_update');
+  Route::get('/faq/delete/{id}', [AdminFaqController::class, 'delete'])->name('admin_faq_delete');
+  Route::post('/faq/store', [AdminFaqController::class, 'store'])->name('admin_faq_store');
 
 });
 
