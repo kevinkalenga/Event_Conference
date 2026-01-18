@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\AdminAccomodationController;
 use App\Http\Controllers\Admin\AdminPhotoController;
 use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminFaqController;
+use App\Http\Controllers\Admin\AdminTestimonialController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -150,6 +151,13 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/faq/update/{id}', [AdminFaqController::class, 'update'])->name('admin_faq_update');
   Route::get('/faq/delete/{id}', [AdminFaqController::class, 'delete'])->name('admin_faq_delete');
   Route::post('/faq/store', [AdminFaqController::class, 'store'])->name('admin_faq_store');
+  // Testimonial
+  Route::get('/testimonial/index', [AdminTestimonialController::class, 'index'])->name('admin_testimonial_index');
+  Route::get('/testimonial/create', [AdminTestimonialController::class, 'create'])->name('admin_testimonial_create');
+  Route::get('/testimonial/edit/{id}', [AdminTestimonialController::class, 'edit'])->name('admin_testimonial_edit');
+  Route::post('/testimonial/update/{id}', [AdminTestimonialController::class, 'update'])->name('admin_testimonial_update');
+  Route::get('/testimonial/delete/{id}', [AdminTestimonialController::class, 'delete'])->name('admin_testimonial_delete');
+  Route::post('/testimonial/store', [AdminTestimonialController::class, 'store'])->name('admin_testimonial_store');
 
 });
 
