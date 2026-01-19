@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\AdminPhotoController;
 use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
+use App\Http\Controllers\Admin\AdminPostController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -159,6 +160,13 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/testimonial/update/{id}', [AdminTestimonialController::class, 'update'])->name('admin_testimonial_update');
   Route::get('/testimonial/delete/{id}', [AdminTestimonialController::class, 'delete'])->name('admin_testimonial_delete');
   Route::post('/testimonial/store', [AdminTestimonialController::class, 'store'])->name('admin_testimonial_store');
+  // Post
+  Route::get('/post/index', [AdminPostController::class, 'index'])->name('admin_post_index');
+  Route::get('/post/create', [AdminPostController::class, 'create'])->name('admin_post_create');
+  Route::get('/post/edit/{id}', [AdminPostController::class, 'edit'])->name('admin_post_edit');
+  Route::post('/post/update/{id}', [AdminPostController::class, 'update'])->name('admin_post_update');
+  Route::get('/post/delete/{id}', [AdminPostController::class, 'delete'])->name('admin_post_delete');
+  Route::post('/post/store', [AdminPostController::class, 'store'])->name('admin_post_store');
 
 });
 
