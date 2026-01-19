@@ -21,6 +21,7 @@ use App\Models\Photo;
 use App\Models\Video;
 use App\Models\Faq;
 use App\Models\Testimonial;
+use App\Models\Post;
 
 class FrontController extends Controller
 {
@@ -334,6 +335,19 @@ class FrontController extends Controller
     {
          $testimonials = Testimonial::get();
          return view('front.testimonial', compact('testimonials'));
+    }
+    public function blog() 
+    {
+         $posts = Post::get();
+         return view('front.blog', compact('posts'));
+    }
+    public function post($slug) 
+    {
+         $post = Post::where('slug', $slug)->first();
+         if(!$post) {
+            return redirect()->route('blog');
+         }
+         return view('front.post', compact('post'));
     }
 
 
