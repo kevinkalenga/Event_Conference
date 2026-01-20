@@ -25,9 +25,9 @@ class AdminPackageController extends Controller
     {
       $request->validate([
         'name' => ['required'],
-        'price' => ['required'],
-        'maximum_tickets' => ['required'],
-        'item_order' => ['required'],
+        'price' => ['required', 'numeric'],
+        'maximum_tickets' => ['required', 'numeric'],
+        'item_order' => ['required', 'numeric'],
         
       ]);
 
