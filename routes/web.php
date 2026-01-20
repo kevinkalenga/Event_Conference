@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminPackageController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -169,6 +170,13 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/post/update/{id}', [AdminPostController::class, 'update'])->name('admin_post_update');
   Route::get('/post/delete/{id}', [AdminPostController::class, 'delete'])->name('admin_post_delete');
   Route::post('/post/store', [AdminPostController::class, 'store'])->name('admin_post_store');
+  // Package
+  Route::get('/package/index', [AdminPackageController::class, 'index'])->name('admin_package_index');
+  Route::get('/package/create', [AdminPackageController::class, 'create'])->name('admin_package_create');
+  Route::get('/package/edit/{id}', [AdminPackageController::class, 'edit'])->name('admin_package_edit');
+  Route::post('/package/update/{id}', [AdminPackageController::class, 'update'])->name('admin_package_update');
+  Route::get('/package/delete/{id}', [AdminPackageController::class, 'delete'])->name('admin_package_delete');
+  Route::post('/package/store', [AdminPackageController::class, 'store'])->name('admin_package_store');
 
 });
 
