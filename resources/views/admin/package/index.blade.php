@@ -52,9 +52,32 @@
                                                 
                                                 
                                                 <td>
+                                                    <a href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_{{ $loop->iteration }}"><i class="fas fa-eye"></i></a>
                                                     <a href="{{route('admin_package_edit', $package->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                                     <a href="{{route('admin_package_delete', $package->id)}}"
                                                      class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i></a>
+
+                                                    <div class="modal fade" id="modal_{{ $loop->iteration }}" tabindex="-1" aria-hidden="true">
+                                                      <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Facilities</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                               <!-- each package has many facilities -->
+                                                                @foreach($package->facilities as $facility)
+                                                                <div class="form-group row bdb1 pt_10 mb_0">
+                                                                    <div class="col-md-12">
+                                                                        {{ $facility->name }} - Status: {{ $facility->status }}
+                                                                    </div>
+                                                                </div>
+                                                                @endforeach
+
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
                                                 </td>
                                              </tr>
                                             @endforeach
