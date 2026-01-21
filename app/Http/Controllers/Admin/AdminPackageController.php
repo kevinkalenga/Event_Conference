@@ -85,10 +85,22 @@ class AdminPackageController extends Controller
     public function edit($id)
     {
       $package = Package::where('id', $id)->first();
-      return view('admin.package.edit', compact('package'));
+       $package_facilities = PackageFacility::orderBy('item_order','asc')->where('package_id',$id)->get();
+        return view('admin.package.edit', compact('package', 'package_facilities'));
     }
     public function update(Request $request, $id)
     {
+      foreach($request->facility as $value) {
+        $arr_facility[] = $value;
+      }
+      foreach($request->status as $value) {
+        $arr_status[] = $value;
+      }
+      
+      foreach($request->order as $value) {
+        $arr_order[] = $value;
+      }
+    
         $package = Package::where('id', $id)->first();
       
          // Assign fields
@@ -99,6 +111,17 @@ class AdminPackageController extends Controller
 
        $package->save();
     
+      for($i=0;$i<count($arr_facility);$i++) {
+        $package_facility = new PackageFacility();
+        $package_facility->package_id = $package->id;
+        $package_facility->name = $arr_facility[$i];
+        $package_facility->status = $arr_status[$i];
+        $package_facility->item_order = $arr_order[$i];
+        $package_facility->save();
+      }
+       
+       
+       
        return redirect()->route('admin_package_index')->with('success','Package Updated successfully!');
     
     }
@@ -115,7 +138,35 @@ class AdminPackageController extends Controller
     }
     
 
+    public function facility_delete($id)
+    {
+        $package_facility = PackageFacility::where('id',$id)->first();
+        $package_facility->delete();
 
+        return redirect()->back()->with('success','Facility deleted successfully!');
+    }
+
+    public function facility_edit($id)
+    {
+        $package_facility = PackageFacility::where('id',$id)->first();
+        return view('admin.package.edit_facility', compact('package_facility'));
+    }
+
+    public function facility_update(Request $request,$id)
+    {
+        $package_facility = PackageFacility::where('id',$id)->first();
+        $request->validate([
+            'name' => ['required'],
+            'status' => ['required'],
+            'item_order' => ['required','numeric'],
+        ]);
+        $package_facility->name = $request->name;
+        $package_facility->status = $request->status;
+        $package_facility->item_order = $request->item_order;
+        $package_facility->save();
+
+        return redirect()->route('admin_package_index')->with('success','Facility updated successfully!');
+    }
 
 
 

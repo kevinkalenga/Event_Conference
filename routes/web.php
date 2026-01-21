@@ -177,6 +177,9 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/package/update/{id}', [AdminPackageController::class, 'update'])->name('admin_package_update');
   Route::get('/package/delete/{id}', [AdminPackageController::class, 'delete'])->name('admin_package_delete');
   Route::post('/package/store', [AdminPackageController::class, 'store'])->name('admin_package_store');
+  Route::get('/package/facility/delete/{id}',[AdminPackageController::class,'facility_delete'])->name('admin_package_facility_delete');
+  Route::get('/package/facility/edit/{id}',[AdminPackageController::class,'facility_edit'])->name('admin_package_facility_edit');
+  Route::post('/package/facility/update/{id}',[AdminPackageController::class,'facility_update'])->name('admin_package_facility_update');
 
 });
 
