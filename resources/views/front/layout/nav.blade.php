@@ -39,9 +39,15 @@
                                 </li>
                                 <li class="member-login-button">
                                     <div class="inner">
-                                        <a class="smooth-scroll nav-link" href="{{route('login')}}">
+                                       @if(Auth::guard('web')->check()) 
+                                         <a class="smooth-scroll nav-link" href="{{route('attendee_dashboard')}}">
+                                            <i class="fa fa-user"></i> Dashboard
+                                         </a>
+                                        @else
+                                          <a class="smooth-scroll nav-link" href="{{route('login')}}">
                                             <i class="fa fa-sign-in"></i> Login
-                                        </a>
+                                          </a>
+                                        @endif
                                     </div>
                                 </li>
                             </ul>

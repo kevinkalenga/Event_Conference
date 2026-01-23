@@ -46,7 +46,7 @@
                               
                             </ul>
                             <div class="global_btn mt_20">
-                                <a class="btn_two" href="buy.html">Buy Ticket</a>
+                                <a class="btn_two" href="{{route('buy_ticket', $package->id)}}">Buy Ticket</a>
                             </div>
                         </div>
                     </div>

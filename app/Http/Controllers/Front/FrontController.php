@@ -360,6 +360,15 @@ class FrontController extends Controller
         ])->orderBy('item_order', 'asc')->get();
          return view('front.pricing', compact('packages'));
     }
+    public function buy_ticket($id) 
+    {
+        $package = Package::where('id', $id)->first();
+        if(!$package) {
+            return redirect()->route('pricing');
+        }
+
+        return view('front.buy_ticket', compact('package'));
+    }
 
 
 

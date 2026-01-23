@@ -61,6 +61,7 @@ Route::middleware('auth')->prefix('attendee')->group(function(){
   Route::get('/profile', [FrontController::class, 'profile'])->name('attendee_profile');
   Route::post('/profile', [FrontController::class, 'profile_submit'])->name('attendee_profile_submit');
   Route::get('/dashboard', [FrontController::class, 'dashboard'])->name('attendee_dashboard');
+  Route::get('/buy/ticket/{id}',[FrontController::class,'buy_ticket'])->name('buy_ticket');
 
 
 });

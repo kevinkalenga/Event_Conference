@@ -31,7 +31,7 @@
                                     <form action="{{route('login_submit')}}" class="registerd" method="post">
                                         @csrf
                                         <div class="form-group">
-                                            <input class="form-control" name="email" placeholder="Email Address" type="text">
+                                            <input class="form-control" name="email" placeholder="Email Address" type="text"  value="{{old('email')}}">
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control" name="password" placeholder="Password" type="password">
