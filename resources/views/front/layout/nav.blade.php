@@ -18,7 +18,7 @@
                                     <a class="smooth-scroll nav-link" href="{{route('schedule')}}">Schedule</a>
                                 </li>
                                 <li>
-                                    <a class="smooth-scroll nav-link" href="pricing.html">Pricing</a>
+                                    <a class="smooth-scroll nav-link" href="{{route('pricing')}}">Pricing</a>
                                 </li>
                                 <li>
                                     <a class="smooth-scroll nav-link" href="{{route('blog')}}">Blog</a>

@@ -41,6 +41,7 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/testimonial', [FrontController::class, 'testimonial'])->name('testimonial');
  Route::get('/post/{slug}', [FrontController::class, 'post'])->name('post');
  Route::get('/blog', [FrontController::class, 'blog'])->name('blog');
+ Route::get('/pricing',[FrontController::class,'pricing'])->name('pricing');
  Route::get('/login', [FrontController::class, 'login'])->name('login');
  Route::post('/login', [FrontController::class, 'login_submit'])->name('login_submit');
  Route::get('/registration', [FrontController::class, 'registration'])->name('registration');

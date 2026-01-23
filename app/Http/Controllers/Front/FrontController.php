@@ -22,6 +22,9 @@ use App\Models\Video;
 use App\Models\Faq;
 use App\Models\Testimonial;
 use App\Models\Post;
+use App\Models\Package;
+use App\Models\PackageFacility;
+
 
 class FrontController extends Controller
 {
@@ -348,6 +351,14 @@ class FrontController extends Controller
             return redirect()->route('blog');
          }
          return view('front.post', compact('post'));
+    }
+    public function pricing() 
+    {
+        $packages = Package::with(['facilities' => function($query) {
+            $query->orderby('item_order', 'asc');
+        },
+        ])->orderBy('item_order', 'asc')->get();
+         return view('front.pricing', compact('packages'));
     }
 
 
