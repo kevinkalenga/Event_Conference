@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Package;
 use Illuminate\Validation\Rule;
 use App\Models\PackageFacility;
+use App\Models\Ticket;
 
 class AdminPackageController extends Controller
 {
@@ -29,17 +30,38 @@ class AdminPackageController extends Controller
     public function store(Request $request)
     {
       //  dd($request->facility);
+      if($request->facility) 
+      {
+        $all_data_check = 0;
+        foreach($request->facility as $value) {
+          $arr_facility[] = $value;
+          if($value == '') {
+            $all_data_check = 1;
+          }
+        }
+        foreach($request->status as $value) {
+          $arr_status[] = $value;
+        }
       
-      foreach($request->facility as $value) {
-        $arr_facility[] = $value;
+        foreach($request->order as $value) {
+          $arr_order[] = $value;
+          if($value == '') {
+            $all_data_check = 1;
+          }
+        } 
+
+
+         // Check if there is any duplicate value in this array: $arr_facility
+         $duplicate_values = array_diff_assoc($arr_facility, array_unique($arr_facility));
+         if(count($duplicate_values) > 0) {
+             return redirect()->back()->with('error','Please remove duplicate facilities');
+         }
+         if($all_data_check == 1) {
+             return redirect()->back()->with('error','Please fill up all the facilities data');
+         }
       }
-      foreach($request->status as $value) {
-        $arr_status[] = $value;
-      }
-      
-      foreach($request->order as $value) {
-        $arr_order[] = $value;
-      }
+
+     
       // echo '<pre>';
       // print_r($arr_facility);
       // print_r($arr_status);
@@ -90,26 +112,59 @@ class AdminPackageController extends Controller
     }
     public function update(Request $request, $id)
     {
-      foreach($request->facility as $value) {
-        $arr_facility[] = $value;
-      }
-      foreach($request->status as $value) {
-        $arr_status[] = $value;
-      }
+      if($request->facility) 
+      {
+        $all_data_check = 0;
+        foreach($request->facility as $value) {
+          $arr_facility[] = $value;
+          if($value == '') {
+            $all_data_check = 1;
+          }
+        }
+        foreach($request->status as $value) {
+          $arr_status[] = $value;
+        }
       
-      foreach($request->order as $value) {
-        $arr_order[] = $value;
+        foreach($request->order as $value) {
+          $arr_order[] = $value;
+          if($value == '') {
+            $all_data_check = 1;
+          }
+        }
+
+         // Check if there is any duplicate value in this array: $arr_facility
+         $duplicate_values = array_diff_assoc($arr_facility, array_unique($arr_facility));
+         if(count($duplicate_values) > 0) {
+             return redirect()->back()->with('error','Please remove duplicate facilities');
+         }
+
+         // Check if there is any duplicate value in the database
+          $dup_check = 0;
+          foreach($arr_facility as $value) {
+              $temp_count = PackageFacility::where('package_id',$id)->where('name',$value)->first();
+              if($temp_count) {
+                  $dup_check = 1;
+              }
+          }
+
+          if($dup_check == 1) {
+            return redirect()->back()->with('error','Please remove duplicate facilities (DB)');
+          }
+          if($all_data_check == 1) {
+            return redirect()->back()->with('error','Please fill up all the facilities data');
+          }
       }
     
-        $package = Package::where('id', $id)->first();
+        
+      $package = Package::where('id', $id)->first();
       
-         // Assign fields
-        $package->name = $request->name;
-        $package->price = $request->price;
-        $package->maximum_tickets = $request->maximum_tickets;
-        $package->item_order = $request->item_order;
+        // Assign fields
+      $package->name = $request->name;
+      $package->price = $request->price;
+      $package->maximum_tickets = $request->maximum_tickets;
+      $package->item_order = $request->item_order;
 
-       $package->save();
+      $package->save();
     
       for($i=0;$i<count($arr_facility);$i++) {
         $package_facility = new PackageFacility();
@@ -129,9 +184,12 @@ class AdminPackageController extends Controller
 
     public function delete($id) 
     {
-         $package = Package::where('id', $id)->first();
+        
+        $package = Package::where('id', $id)->first();
 
-         $package->delete();
+        $package->delete();
+
+        PackageFacility::where('package_id',$id)->delete();
 
          return redirect()->route('admin_package_index')
                      ->with('success', 'Package is Deleted Successfully');
