@@ -434,6 +434,52 @@ class FrontController extends Controller
         
         }elseif($request->payment_method == "Stripe") {
         
+        
+                // Stripe Start
+            $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+            $response = $stripe->checkout->sessions->create([
+                'line_items' => [
+                    [
+                        'price_data' => [
+                            'currency' => 'usd',
+                            'product_data' => [
+                                'name' => $request->package_name,
+                            ],
+                            'unit_amount' => $unit_price*100, //convert into cent 100
+                        ],
+                        'quantity' => $quantity,
+                    ],
+                ],
+                'mode' => 'payment',
+                'success_url' => route('stripe_success').'?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => route('stripe_cancel'),
+            ]);
+            //dd($response);
+            if(isset($response->id) && $response->id != ''){
+                // save the data in the session
+                session()->put('package_id', $request->package_id);
+                session()->put('package_name', $request->package_name);
+                session()->put('quantity', $request->quantity);
+                session()->put('unit_price', $request->unit_price);
+                session()->put('price', $price);
+
+                session()->put('billing_name', $request->billing_name);
+                session()->put('billing_email', $request->billing_email);
+                session()->put('billing_phone', $request->billing_phone);
+                session()->put('billing_address', $request->billing_address);
+                session()->put('billing_country', $request->billing_country);
+                session()->put('billing_state', $request->billing_state);
+                session()->put('billing_city', $request->billing_city);
+                session()->put('billing_zip', $request->billing_zip);
+                session()->put('billing_note', $request->billing_note);
+
+                return redirect($response->url);
+            } else {
+                return redirect()->route('stripe_cancel');
+            }
+            // Stripe End
+        
+        
         }else {
         
         }
@@ -505,6 +551,71 @@ class FrontController extends Controller
     {
         return redirect()->route('attendee_dashboard')->with('error','Payment is cancelled!');
     }
+
+    // Stripe success and cancel
+    public function stripe_success(Request $request)
+    {
+        if(isset($request->session_id)) 
+        {
+
+            // $unique_number = time().rand(1000,9999);
+
+            $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+            $response = $stripe->checkout->sessions->retrieve($request->session_id);
+            //dd($response);
+
+            $ticket = new Ticket;
+            $ticket->user_id = Auth::guard('web')->user()->id;
+            $ticket->package_id = session()->get('package_id');
+            $ticket->package_name = session()->get('package_name');
+            $ticket->billing_name = session()->get('billing_name');
+            $ticket->billing_email = session()->get('billing_email');
+            $ticket->billing_phone = session()->get('billing_phone');
+            $ticket->billing_address = session()->get('billing_address');
+            $ticket->billing_country = session()->get('billing_country');
+            $ticket->billing_state = session()->get('billing_state');
+            $ticket->billing_city = session()->get('billing_city');
+            $ticket->billing_zip = session()->get('billing_zip');
+            $ticket->billing_note = session()->get('billing_note');
+            $ticket->payment_method = "Stripe";
+            $ticket->payment_currency = $response->currency;
+            $ticket->payment_status = 'Completed';
+            $ticket->transaction_id = $response->id;
+            $ticket->per_ticket_price = session()->get('unit_price');
+            $ticket->total_tickets = session()->get('quantity');
+            $ticket->total_price = session()->get('price');
+            $ticket->save();
+
+            unset($_SESSION['package_id']);
+            unset($_SESSION['package_name']);
+            unset($_SESSION['quantity']);
+            unset($_SESSION['unit_price']);
+            unset($_SESSION['price']);
+            unset($_SESSION['billing_name']);
+            unset($_SESSION['billing_email']);
+            unset($_SESSION['billing_phone']);
+            unset($_SESSION['billing_address']);
+            unset($_SESSION['billing_country']);
+            unset($_SESSION['billing_state']);
+            unset($_SESSION['billing_city']);
+            unset($_SESSION['billing_zip']);
+            unset($_SESSION['billing_note']);
+
+            return redirect()->route('attendee_dashboard')->with('success','Payment is successful!');
+
+        } else {
+            return redirect()->route('stripe_cancel');
+        }
+    }
+
+    public function stripe_cancel()
+    {
+        return redirect()->route('attendee_dashboard')->with('error','Payment is cancelled!');
+    }
+
+
+
+    
 
 
 

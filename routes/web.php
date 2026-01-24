@@ -65,6 +65,8 @@ Route::middleware('auth')->prefix('attendee')->group(function(){
   Route::post('/payment',[FrontController::class,'payment'])->name('payment');
   Route::get('/paypal/success', [FrontController::class, 'paypal_success'])->name('paypal_success');
   Route::get('/paypal/cancel', [FrontController::class, 'paypal_cancel'])->name('paypal_cancel');
+  Route::get('/stripe/success', [FrontController::class, 'stripe_success'])->name('stripe_success');
+  Route::get('/stripe/cancel', [FrontController::class, 'stripe_cancel'])->name('stripe_cancel');
 
 
 });
