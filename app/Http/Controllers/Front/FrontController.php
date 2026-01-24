@@ -24,6 +24,8 @@ use App\Models\Testimonial;
 use App\Models\Post;
 use App\Models\Package;
 use App\Models\PackageFacility;
+use App\Models\Ticket;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
 class FrontController extends Controller
@@ -368,6 +370,140 @@ class FrontController extends Controller
         }
 
         return view('front.buy_ticket', compact('package'));
+    }
+
+    // Paypal(payment)
+    public function payment(Request $request)
+    {
+        //  dd($request->all());
+        $package_id = $request->package_id;
+        $unit_price = $request->unit_price;
+        $quantity = $request->quantity;
+        $price = $unit_price * $quantity;
+        
+        if($request->payment_method == "PayPal") 
+        {
+         
+               // PayPal Start
+            $provider = new PayPalClient;
+            $provider->setApiCredentials(config('paypal'));
+            $paypalToken = $provider->getAccessToken();
+            $response = $provider->createOrder([
+                "intent" => "CAPTURE",
+                "application_context" => [
+                    "return_url" => route('paypal_success'),
+                    "cancel_url" => route('paypal_cancel')
+                ],
+                "purchase_units" => [
+                    [
+                        "amount" => [
+                            "currency_code" => "USD",
+                            "value" => $price
+                        ]
+                    ]
+                ]
+            ]);
+            //dd($response);
+            if(isset($response['id']) && $response['id'] != null) {
+                foreach($response['links'] as $link) {
+                    if($link['rel'] == 'approve') {
+                        // put evry data into the session veriable so that to use into another function
+                        session()->put('package_id', $request->package_id);
+                        session()->put('package_name', $request->package_name);
+                        session()->put('quantity', $request->quantity);
+                        session()->put('unit_price', $request->unit_price);
+                        session()->put('price', $price);
+
+                        session()->put('billing_name', $request->billing_name);
+                        session()->put('billing_email', $request->billing_email);
+                        session()->put('billing_phone', $request->billing_phone);
+                        session()->put('billing_address', $request->billing_address);
+                        session()->put('billing_country', $request->billing_country);
+                        session()->put('billing_state', $request->billing_state);
+                        session()->put('billing_city', $request->billing_city);
+                        session()->put('billing_zip', $request->billing_zip);
+                        session()->put('billing_note', $request->billing_note);
+                        return redirect()->away($link['href']);
+                    }
+                }
+            } else {
+                return redirect()->route('paypal_cancel');
+            }
+            // PayPal End
+        
+        
+        }elseif($request->payment_method == "Stripe") {
+        
+        }else {
+        
+        }
+
+        
+    }
+
+
+    public function paypal_success(Request $request)
+    {
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $paypalToken = $provider->getAccessToken();
+        $response = $provider->capturePaymentOrder($request->token);
+        //dd($response);
+        if(isset($response['status']) && $response['status'] == 'COMPLETED') 
+        {    
+            // Generate unique number
+            // $unique_number = time().rand(1000,9999);
+
+            // Insert data into database
+            $ticket = new Ticket;
+            $ticket->user_id = Auth::guard('web')->user()->id;
+            $ticket->package_id = session()->get('package_id');
+            // $ticket->payment_id = $unique_number;
+            $ticket->package_name = session()->get('package_name');
+            $ticket->billing_name = session()->get('billing_name');
+            $ticket->billing_email = session()->get('billing_email');
+            $ticket->billing_phone = session()->get('billing_phone');
+            $ticket->billing_address = session()->get('billing_address');
+            $ticket->billing_country = session()->get('billing_country');
+            $ticket->billing_state = session()->get('billing_state');
+            $ticket->billing_city = session()->get('billing_city');
+            $ticket->billing_zip = session()->get('billing_zip');
+            $ticket->billing_note = session()->get('billing_note');
+            $ticket->payment_method = "PayPal";
+            $ticket->payment_currency = $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'];
+            $ticket->payment_status = 'Completed';
+            $ticket->transaction_id = $response['id'];
+            $ticket->per_ticket_price = session()->get('unit_price');
+            $ticket->total_tickets = session()->get('quantity');
+            $ticket->total_price = session()->get('price');
+            $ticket->save();
+
+            unset($_SESSION['package_id']);
+            unset($_SESSION['package_name']);
+            unset($_SESSION['quantity']);
+            unset($_SESSION['unit_price']);
+            unset($_SESSION['price']);
+            unset($_SESSION['billing_name']);
+            unset($_SESSION['billing_email']);
+            unset($_SESSION['billing_phone']);
+            unset($_SESSION['billing_address']);
+            unset($_SESSION['billing_country']);
+            unset($_SESSION['billing_state']);
+            unset($_SESSION['billing_city']);
+            unset($_SESSION['billing_zip']);
+            unset($_SESSION['billing_note']);
+
+            return redirect()->route('attendee_dashboard')->with('success','Payment is successful!');
+
+        } else {
+            return redirect()->route('paypal_cancel');
+        }
+    }
+
+
+    public function paypal_cancel()
+    {
+        return redirect()->route('attendee_dashboard')->with('error','Payment is cancelled!');
     }
 
 

@@ -62,6 +62,9 @@ Route::middleware('auth')->prefix('attendee')->group(function(){
   Route::post('/profile', [FrontController::class, 'profile_submit'])->name('attendee_profile_submit');
   Route::get('/dashboard', [FrontController::class, 'dashboard'])->name('attendee_dashboard');
   Route::get('/buy/ticket/{id}',[FrontController::class,'buy_ticket'])->name('buy_ticket');
+  Route::post('/payment',[FrontController::class,'payment'])->name('payment');
+  Route::get('/paypal/success', [FrontController::class, 'paypal_success'])->name('paypal_success');
+  Route::get('/paypal/cancel', [FrontController::class, 'paypal_cancel'])->name('paypal_cancel');
 
 
 });
