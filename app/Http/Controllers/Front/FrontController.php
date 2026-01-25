@@ -180,7 +180,7 @@ class FrontController extends Controller
     public function logout()
     {
        Auth::guard('web')->logout();
-       return redirect()->route('login')->with('success','Logout is successful!');
+       return redirect()->route('home')->with('success','Logout is successful!');
     }
     public function dashboard()
     {
@@ -482,6 +482,27 @@ class FrontController extends Controller
         
         }else {
         
+              // Bank Start
+            session()->put('package_id', $request->package_id);
+            session()->put('package_name', $request->package_name);
+            session()->put('quantity', $request->quantity);
+            session()->put('unit_price', $request->unit_price);
+            session()->put('price', $price);
+
+            session()->put('billing_name', $request->billing_name);
+            session()->put('billing_email', $request->billing_email);
+            session()->put('billing_phone', $request->billing_phone);
+            session()->put('billing_address', $request->billing_address);
+            session()->put('billing_country', $request->billing_country);
+            session()->put('billing_state', $request->billing_state);
+            session()->put('billing_city', $request->billing_city);
+            session()->put('billing_zip', $request->billing_zip);
+            session()->put('billing_note', $request->billing_note);
+
+            return view('front.bank');
+            // Bank End
+        
+        
         }
 
         
@@ -519,6 +540,7 @@ class FrontController extends Controller
             $ticket->payment_currency = $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'];
             $ticket->payment_status = 'Completed';
             $ticket->transaction_id = $response['id'];
+            $ticket->bank_transaction_info ='';
             $ticket->per_ticket_price = session()->get('unit_price');
             $ticket->total_tickets = session()->get('quantity');
             $ticket->total_price = session()->get('price');
@@ -581,6 +603,7 @@ class FrontController extends Controller
             $ticket->payment_currency = $response->currency;
             $ticket->payment_status = 'Completed';
             $ticket->transaction_id = $response->id;
+            $ticket->bank_transaction_info = '';
             $ticket->per_ticket_price = session()->get('unit_price');
             $ticket->total_tickets = session()->get('quantity');
             $ticket->total_price = session()->get('price');
@@ -613,7 +636,66 @@ class FrontController extends Controller
         return redirect()->route('attendee_dashboard')->with('error','Payment is cancelled!');
     }
 
+    
 
+    public function bank_success(Request $request)
+    {
+        if($request->bank_transaction_info == '') {
+            return redirect()->route('buy_ticket',session()->get('package_id'))->with('error','Please enter the bank transaction information!');
+        }
+
+        // $unique_number = time().rand(1000,9999);
+
+        $ticket = new Ticket;
+        $ticket->user_id = Auth::guard('web')->user()->id;
+        $ticket->package_id = session()->get('package_id');
+        // $ticket->payment_id = $unique_number;
+        $ticket->package_name = session()->get('package_name');
+        $ticket->billing_name = session()->get('billing_name');
+        $ticket->billing_email = session()->get('billing_email');
+        $ticket->billing_phone = session()->get('billing_phone');
+        $ticket->billing_address = session()->get('billing_address');
+        $ticket->billing_country = session()->get('billing_country');
+        $ticket->billing_state = session()->get('billing_state');
+        $ticket->billing_city = session()->get('billing_city');
+        $ticket->billing_zip = session()->get('billing_zip');
+        $ticket->billing_note = session()->get('billing_note');
+        $ticket->payment_method = "Bank";
+        $ticket->payment_currency = "USD";
+        $ticket->payment_status = 'Pending';
+        $ticket->transaction_id = "";
+        $ticket->bank_transaction_info = $request->bank_transaction_info;
+        $ticket->per_ticket_price = session()->get('unit_price');
+        $ticket->total_tickets = session()->get('quantity');
+        $ticket->total_price = session()->get('price');
+        $ticket->save();
+        
+        // $admin = Admin::where('id',1)->first();
+       
+        // $link = url('admin/ticket/index');
+        // $subject = "Bank Payment Request";
+        // $message = "Someone paid you via bank, so please click on the following link:<br>";
+        // $message .= "<a href='".$link."'>Click Here</a>";
+
+        // \Mail::to($admin->email)->send(new Websitemail($subject,$message));
+
+        unset($_SESSION['package_id']);
+        unset($_SESSION['package_name']);
+        unset($_SESSION['quantity']);
+        unset($_SESSION['unit_price']);
+        unset($_SESSION['price']);
+        unset($_SESSION['billing_name']);
+        unset($_SESSION['billing_email']);
+        unset($_SESSION['billing_phone']);
+        unset($_SESSION['billing_address']);
+        unset($_SESSION['billing_country']);
+        unset($_SESSION['billing_state']);
+        unset($_SESSION['billing_city']);
+        unset($_SESSION['billing_zip']);
+        unset($_SESSION['billing_note']);
+
+        return redirect()->route('attendee_dashboard')->with('success','Payment Information that you provided will be verified by admin and then it will be successful!');
+    }
 
     
 

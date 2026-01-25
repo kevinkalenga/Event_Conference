@@ -106,7 +106,7 @@
                         <select name="payment_method" class="form-control">
                             <option value="PayPal">PayPal</option>
                             <option value="Stripe">Stripe</option>
-                            <option value="Cash">Cash</option>
+                            <option value="Bank">Bank</option>
                         </select>
                         <div class="">
                             <button type="submit" class="btn btn-primary">Buy Ticket</button>
