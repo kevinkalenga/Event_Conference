@@ -8,6 +8,7 @@ use App\Mail\Websitemail;
 use Hash;
 use Auth;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
@@ -670,14 +671,14 @@ class FrontController extends Controller
         $ticket->total_price = session()->get('price');
         $ticket->save();
         
-        // $admin = Admin::where('id',1)->first();
+        $admin = Admin::where('id',1)->first();
        
-        // $link = url('admin/ticket/index');
-        // $subject = "Bank Payment Request";
-        // $message = "Someone paid you via bank, so please click on the following link:<br>";
-        // $message .= "<a href='".$link."'>Click Here</a>";
+        $link = url('admin/ticket/index');
+        $subject = "Bank Payment Request";
+        $message = "Someone paid you via bank, so please click on the following link:<br>";
+        $message .= "<a href='".$link."'>Click Here</a>";
 
-        // \Mail::to($admin->email)->send(new Websitemail($subject,$message));
+        \Mail::to($admin->email)->send(new Websitemail($subject,$message));
 
         unset($_SESSION['package_id']);
         unset($_SESSION['package_name']);
