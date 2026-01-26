@@ -65,13 +65,16 @@
                                                       @php 
                                                       $change_status = 'Completed';
                                                       @endphp
-                                                      <span class="badge badge-danger">Pending</span>
+                                                      
+                                                      <span class="badge badge-danger">Pending</span><br>
                                                       @elseif($ticket->payment_status == 'Completed')
                                                       @php
                                                       $change_status = 'Pending';
+                                                   
                                                       @endphp
                                                       <span class="badge badge-success">Completed</span>
                                                     @endif
+                                                    <a href="{{ route('admin_ticket_change_status',[$ticket->id,$change_status]) }}">Change Status</a>
                                                 </td>
                                                 <td>
                                                   {{ $ticket->created_at }}
@@ -79,9 +82,8 @@
                                                 
                                                 <td>
                                                     <a href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_{{ $loop->iteration }}"><i class="fas fa-eye"></i></a>
-                                                    {{-- <a href="{{route('admin_package_edit', $package->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <a href="{{route('admin_package_delete', $package->id)}}"
-                                                     class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i></a>--}}
+                                                    <a href="{{route('admin_ticket_delete', $ticket->id)}}"
+                                                     class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i></a>
 
                                                    <div class="modal fade" id="modal_{{ $loop->iteration }}" tabindex="-1" aria-hidden="true">
                                                      <div class="modal-dialog">

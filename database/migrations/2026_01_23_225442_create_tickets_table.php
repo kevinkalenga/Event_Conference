@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('billing_note')->nullable();
             $table->string('payment_method');
             $table->string('payment_currency');
-            $table->string('payment_status')->default('pending');
+            $table->string('payment_status')->default('Pending');
             $table->string('transaction_id')->nullable();
             $table->integer('per_ticket_price');
             $table->integer('total_tickets');
