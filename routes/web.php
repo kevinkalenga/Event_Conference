@@ -193,7 +193,8 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   // Ticket 
   Route::get('/ticket/index', [AdminTicketController::class, 'index'])->name('admin_ticket_index');
   Route::get('/ticket/change-status/{id}/{status}',[AdminTicketController::class,'change_status'])->name('admin_ticket_change_status');
-   Route::get('/ticket/delete/{id}',[AdminTicketController::class,'delete'])->name('admin_ticket_delete');
+  Route::get('/ticket/delete/{id}',[AdminTicketController::class,'delete'])->name('admin_ticket_delete');
+  Route::get('/ticket/invoice/{id}',[AdminTicketController::class,'invoice'])->name('admin_ticket_invoice');
 
 });
 

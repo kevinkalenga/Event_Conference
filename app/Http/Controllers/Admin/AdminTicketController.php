@@ -30,4 +30,10 @@ class AdminTicketController extends Controller
 
         return redirect()->back()->with('success','Ticket deleted successfully!');
     }
+
+    public function invoice($id)
+    {
+        $ticket = Ticket::with(['package','user'])->where('id',$id)->first();
+        return view('admin.ticket.invoice', compact('ticket'));
+    }
 }

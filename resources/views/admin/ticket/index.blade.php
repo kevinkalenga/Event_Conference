@@ -41,7 +41,7 @@
                                                 <th>Payment Status</th>
                                                 <th>Date Time</th>
                                               
-                                                <th>Actions</th>
+                                                <th class="w_100">Actions</th>
                                                
                                             </tr>
                                          </thead>
@@ -82,6 +82,7 @@
                                                 
                                                 <td>
                                                     <a href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_{{ $loop->iteration }}"><i class="fas fa-eye"></i></a>
+                                                    <a href="{{ route('admin_ticket_invoice',$ticket->id) }}" class="btn btn-success btn-sm"><i class="fas fa-file-invoice"></i></a>
                                                     <a href="{{route('admin_ticket_delete', $ticket->id)}}"
                                                      class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i></a>
 
