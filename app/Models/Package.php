@@ -12,4 +12,10 @@ class Package extends Model
         // A package has many facilities
         return $this->hasMany(PackageFacility::class);
     }
+
+    public function tickets()
+    {
+        // Each package has multiple tickets
+        return $this->hasMany(Ticket::class);
+    }
 }

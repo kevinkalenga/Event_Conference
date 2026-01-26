@@ -54,4 +54,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function tickets()
+    {
+        // A user can have multiple ticket
+        return $this->hasMany(Ticket::class);
+    }
 }

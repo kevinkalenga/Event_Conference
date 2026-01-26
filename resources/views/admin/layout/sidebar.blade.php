@@ -76,6 +76,8 @@
                         <i class="fas fa-hand-point-right"></i> <span>Post</span></a></li>
                      <li class="{{ Request::is('admin/package/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_package_index')}}">
                         <i class="fas fa-hand-point-right"></i> <span>Packages</span></a></li>
+                     <li class="{{ Request::is('admin/ticket/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_ticket_index')}}">
+                        <i class="fas fa-hand-point-right"></i> <span>Tickets</span></a></li>
 
                     
 

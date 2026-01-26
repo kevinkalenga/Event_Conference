@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('package_id')->constrained()->onDelete('cascade');
+            $table->string('payment_id');
             $table->string('package_name');
             $table->string('billing_name');
             $table->string('billing_email');

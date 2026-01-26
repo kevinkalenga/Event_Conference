@@ -520,13 +520,13 @@ class FrontController extends Controller
         if(isset($response['status']) && $response['status'] == 'COMPLETED') 
         {    
             // Generate unique number
-            // $unique_number = time().rand(1000,9999);
+             $unique_number = time().rand(1000,9999);
 
             // Insert data into database
             $ticket = new Ticket;
             $ticket->user_id = Auth::guard('web')->user()->id;
             $ticket->package_id = session()->get('package_id');
-            // $ticket->payment_id = $unique_number;
+            $ticket->payment_id = $unique_number;
             $ticket->package_name = session()->get('package_name');
             $ticket->billing_name = session()->get('billing_name');
             $ticket->billing_email = session()->get('billing_email');
@@ -581,7 +581,7 @@ class FrontController extends Controller
         if(isset($request->session_id)) 
         {
 
-            // $unique_number = time().rand(1000,9999);
+            $unique_number = time().rand(1000,9999);
 
             $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
             $response = $stripe->checkout->sessions->retrieve($request->session_id);
@@ -590,6 +590,7 @@ class FrontController extends Controller
             $ticket = new Ticket;
             $ticket->user_id = Auth::guard('web')->user()->id;
             $ticket->package_id = session()->get('package_id');
+            $ticket->payment_id = $unique_number;
             $ticket->package_name = session()->get('package_name');
             $ticket->billing_name = session()->get('billing_name');
             $ticket->billing_email = session()->get('billing_email');
@@ -645,12 +646,12 @@ class FrontController extends Controller
             return redirect()->route('buy_ticket',session()->get('package_id'))->with('error','Please enter the bank transaction information!');
         }
 
-        // $unique_number = time().rand(1000,9999);
+        $unique_number = time().rand(1000,9999);
 
         $ticket = new Ticket;
         $ticket->user_id = Auth::guard('web')->user()->id;
         $ticket->package_id = session()->get('package_id');
-        // $ticket->payment_id = $unique_number;
+        $ticket->payment_id = $unique_number;
         $ticket->package_name = session()->get('package_name');
         $ticket->billing_name = session()->get('billing_name');
         $ticket->billing_email = session()->get('billing_email');

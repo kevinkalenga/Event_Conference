@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\AdminTicketController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -188,6 +189,9 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::get('/package/facility/delete/{id}',[AdminPackageController::class,'facility_delete'])->name('admin_package_facility_delete');
   Route::get('/package/facility/edit/{id}',[AdminPackageController::class,'facility_edit'])->name('admin_package_facility_edit');
   Route::post('/package/facility/update/{id}',[AdminPackageController::class,'facility_update'])->name('admin_package_facility_update');
+
+  // Ticket 
+  Route::get('/ticket/index', [AdminTicketController::class, 'index'])->name('admin_ticket_index');
 
 });
 
