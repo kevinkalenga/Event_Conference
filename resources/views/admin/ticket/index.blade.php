@@ -49,7 +49,15 @@
                                             @foreach($tickets as $ticket)
                                              <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                <td>{{$ticket->user->name}}</td>
+                                                <td>
+                                                    {{$ticket->user->name}}
+                                                    {{ $ticket->user->email }}<br>
+                                                    <a href="{{ route('admin_attendee_index') }}">
+                                                       See Detail
+                                                    </a>
+                                                </td>
+                                                
+                                                
                                                 <td>
                                                     <a href="{{ route('admin_package_index') }}">
                                                       {{$ticket->package->name}}

@@ -699,6 +699,14 @@ class FrontController extends Controller
         return redirect()->route('attendee_dashboard')->with('success','Payment Information that you provided will be verified by admin and then it will be successful!');
     }
 
+
+    public function ticket()
+    {
+        // the user who has bougth the ticket and logged in
+        $tickets = Ticket::with('package')->where('user_id',Auth::guard('web')->user()->id)->get();
+        return view('attendee.ticket', compact('tickets'));
+    }
+
     
 
 

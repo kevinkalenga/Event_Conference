@@ -22,7 +22,7 @@
 </div> 
 
         <div class="user-section pt_70 pb_70">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="user-sidebar">

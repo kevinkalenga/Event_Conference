@@ -34,7 +34,7 @@
                                                 <th>Photo</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                              
+                                                <th>Status</th>
                                                 <th>Actions</th>
                                                
                                             </tr>
@@ -52,6 +52,16 @@
                                                </td>
                                                 <td>{{$attendee->name}}</td>
                                                 <td>{{$attendee->email}}</td>
+                                                 
+                                                <td>
+                                                   @if($attendee->status == 1)
+                                                     <span class="badge badge-success">Active</span>
+                                                   @else
+                                                     <span class="badge badge-danger">Inactive</span>
+                                                   @endif
+                                                </td>
+                                                
+                                                
                                                 
                                                 <td>
                                                     <a href="{{route('admin_attendee_edit', $attendee->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>

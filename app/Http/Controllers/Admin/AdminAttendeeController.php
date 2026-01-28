@@ -78,9 +78,8 @@ class AdminAttendeeController extends Controller
        $request->validate([
         'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
         'name' => ['required'],
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-        'confirm_password' => ['required', 'same:password'],
+        'email' => ['required', 'email', Rule::unique('users')->ignore($attendee->id)],
+        
       
       ]);
 
@@ -106,10 +105,18 @@ class AdminAttendeeController extends Controller
            $attendee->photo = $final_name;
        }
 
+         if($request->password) {
+                $request->validate([
+                    'password'=>'required',
+                    'confirm_password'=>'required|same:password',
+                ]);
+                
+             $attendee->password = bcrypt($request->password);;
+          }
+
         $attendee->name = $request->name;
         $attendee->email = $request->email;
         $attendee->photo = $final_name;
-        $attendee->password = bcrypt($request->password);
         $attendee->phone = $request->phone;
         $attendee->address = $request->address;
         $attendee->country = $request->country;
