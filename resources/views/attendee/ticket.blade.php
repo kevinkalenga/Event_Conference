@@ -64,7 +64,7 @@
                             </td>
                             <td>
                                 <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_{{ $loop->iteration }}"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="btn btn-success btn-sm pl_10 pr_10"><i class="fa fa-info"></i></a>
+                                <a href="{{ route('attendee_invoice',$ticket->id) }}" class="btn btn-success btn-sm pl_10 pr_10"><i class="fa fa-info"></i></a>
                             </td>
                             <div class="modal fade" id="modal_{{ $loop->iteration }}" tabindex="-1" role="dialog">
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">

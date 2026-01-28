@@ -70,7 +70,8 @@ Route::middleware('auth')->prefix('attendee')->group(function(){
   Route::get('/stripe/success', [FrontController::class, 'stripe_success'])->name('stripe_success');
   Route::get('/stripe/cancel', [FrontController::class, 'stripe_cancel'])->name('stripe_cancel');
   Route::post('/bank/success', [FrontController::class, 'bank_success'])->name('bank_success');
-   Route::get('/ticket',[FrontController::class,'ticket'])->name('attendee_ticket');
+  Route::get('/ticket',[FrontController::class,'ticket'])->name('attendee_ticket');
+  Route::get('/invoice/{id}',[FrontController::class,'invoice'])->name('attendee_invoice');
 
 });
 

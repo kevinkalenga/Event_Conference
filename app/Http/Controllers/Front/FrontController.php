@@ -707,7 +707,13 @@ class FrontController extends Controller
         return view('attendee.ticket', compact('tickets'));
     }
 
-    
+    public function invoice($id)
+    {
+        $ticket = Ticket::with('package')->where('id',$id)->first();
+        $admin = Admin::where('id',1)->first();
+        // $setting = Setting::where('id',1)->first();
+        return view('attendee.invoice', compact('ticket', 'admin'));
+    }
 
 
 
