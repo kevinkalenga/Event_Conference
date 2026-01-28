@@ -78,6 +78,9 @@
                         <i class="fas fa-hand-point-right"></i> <span>Packages</span></a></li>
                      <li class="{{ Request::is('admin/ticket/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_ticket_index')}}">
                         <i class="fas fa-hand-point-right"></i> <span>Tickets</span></a></li>
+                     <li class="{{ Request::is('admin/attendee/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_attendee_index')}}">
+                        <i class="fas fa-hand-point-right"></i> <span>Attendees</span></a></li>
+                     
 
                     
 

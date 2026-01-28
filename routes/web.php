@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminTicketController;
+use App\Http\Controllers\Admin\AdminAttendeeController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -195,6 +196,15 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::get('/ticket/change-status/{id}/{status}',[AdminTicketController::class,'change_status'])->name('admin_ticket_change_status');
   Route::get('/ticket/delete/{id}',[AdminTicketController::class,'delete'])->name('admin_ticket_delete');
   Route::get('/ticket/invoice/{id}',[AdminTicketController::class,'invoice'])->name('admin_ticket_invoice');
+  
+   // Attendee 
+  Route::get('/attendee/index', [AdminAttendeeController::class, 'index'])->name('admin_attendee_index');
+  Route::get('/attendee/create', [AdminAttendeeController::class, 'create'])->name('admin_attendee_create');
+  Route::get('/attendee/edit/{id}', [AdminAttendeeController::class, 'edit'])->name('admin_attendee_edit');
+  Route::post('/attendee/update/{id}', [AdminAttendeeController::class, 'update'])->name('admin_attendee_update');
+  Route::get('/attendee/delete/{id}', [AdminAttendeeController::class, 'delete'])->name('admin_attendee_delete');
+  Route::post('/attendee/store', [AdminAttendeeController::class, 'store'])->name('admin_attendee_store');
+  
 
 });
 

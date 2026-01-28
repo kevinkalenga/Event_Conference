@@ -14,9 +14,9 @@
         <div class="main-content">
               <section class="section">
                 <div class="section-header d-flex justify-content-between">
-                    <h1>Organisers</h1>
+                    <h1>Attendees</h1>
                     <div>
-                      <a href="{{route('admin_organiser_create')}}" class="btn btn-primary">Add New</a>
+                      <a href="{{route('admin_attendee_create')}}" class="btn btn-primary">Add New</a>
                     </div>
                 </div>
                 
@@ -33,25 +33,29 @@
                                                 <th>SL</th>
                                                 <th>Photo</th>
                                                 <th>Name</th>
-                                                <th>Designation</th>
+                                                <th>Email</th>
                                               
                                                 <th>Actions</th>
                                                
                                             </tr>
                                          </thead>
                                          <tbody>
-                                            @foreach($organisers as $organiser)
+                                            @foreach($attendees as $attendee)
                                              <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>
-                                                    <img style="width: 100px;" src="{{asset('uploads/'.$organiser->photo)}}" alt="" class="w_100">
+                                                    @if($attendee->photo != '')
+                                                     <img style="width: 100px;" src="{{asset('uploads/'.$attendee->photo)}}" alt="" class="w_100">
+                                                    @else
+                                                      <img src="{{ asset('uploads/default.png') }}" alt="" class="w_100">
+                                                    @endif
                                                </td>
-                                                <td>{{$organiser->name}}</td>
-                                                <td>{{$organiser->designation}}</td>
+                                                <td>{{$attendee->name}}</td>
+                                                <td>{{$attendee->email}}</td>
                                                 
                                                 <td>
-                                                    <a href="{{route('admin_organiser_edit', $organiser->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <a href="{{route('admin_organiser_delete', $organiser->id)}}"
+                                                    <a href="{{route('admin_attendee_edit', $attendee->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <a href="{{route('admin_attendee_delete', $attendee->id)}}"
                                                      class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i></a>
                                                 </td>
                                              </tr>
