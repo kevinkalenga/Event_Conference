@@ -72,6 +72,8 @@ Route::middleware('auth')->prefix('attendee')->group(function(){
   Route::post('/bank/success', [FrontController::class, 'bank_success'])->name('bank_success');
   Route::get('/ticket',[FrontController::class,'ticket'])->name('attendee_ticket');
   Route::get('/invoice/{id}',[FrontController::class,'invoice'])->name('attendee_invoice');
+  Route::get('/message',[FrontController::class,'message'])->name('attendee_message');
+  Route::post('/message-submit',[FrontController::class,'message_submit'])->name('attendee_message_submit');
 
 });
 

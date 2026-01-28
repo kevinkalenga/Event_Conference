@@ -11,4 +11,10 @@ class Admin extends  Authenticatable
     protected $fillable = [
         'token',    // ← AJOUT IMPORTANT
     ];
+
+    public function messages()
+    {
+       // A user can have multiple message 
+       return $this->hasMany(Message::class);
+    }
 }

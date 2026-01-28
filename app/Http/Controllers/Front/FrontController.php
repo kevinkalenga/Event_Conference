@@ -26,6 +26,7 @@ use App\Models\Post;
 use App\Models\Package;
 use App\Models\PackageFacility;
 use App\Models\Ticket;
+use App\Models\Message;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
@@ -713,6 +714,37 @@ class FrontController extends Controller
         $admin = Admin::where('id',1)->first();
         // $setting = Setting::where('id',1)->first();
         return view('attendee.invoice', compact('ticket', 'admin'));
+    }
+
+
+    public function message()
+    {
+       
+        return view('attendee.message');
+    }
+
+
+    public function message_submit(Request $request)
+    {
+        $request->validate([
+            'message' => ['required'],
+        ]);
+
+        $message = new Message();
+        $message->user_id = Auth::guard('web')->user()->id;
+        $message->message = $request->message;
+        $message->save();
+
+        $admin = Admin::where('id',1)->first();
+       
+        $link = url('admin/message/detail/'.Auth::guard('web')->user()->id);
+        $subject = "Message from Attendee";
+        $message = 'Please click on the following link to view the message from attendee:<br>';
+        $message .= '<a href="'.$link.'">'.$link.'</a>';
+
+        \Mail::to($admin->email)->send(new Websitemail($subject,$message));
+
+        return redirect()->back()->with('success','Message is sent successfully!');
     }
 
 

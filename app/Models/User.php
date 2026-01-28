@@ -60,4 +60,11 @@ class User extends Authenticatable
         // A user can have multiple ticket
         return $this->hasMany(Ticket::class);
     }
+
+    public function messages()
+    {
+       // A user can have multiple message 
+       return $this->hasMany(Message::class);
+    }
+  
 }
