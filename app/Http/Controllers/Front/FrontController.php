@@ -28,6 +28,7 @@ use App\Models\PackageFacility;
 use App\Models\Ticket;
 use App\Models\Message;
 use App\Models\HomeSpeaker;
+use App\Models\HomePricing;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
@@ -39,11 +40,12 @@ class FrontController extends Controller
         $home_welcome = HomeWelcome::where('id', 1)->first();
         $home_counter = HomeCounter::where('id', 1)->first();
         $home_speaker = HomeSpeaker::where('id',1)->first();
+        $home_pricing = HomePricing::where('id',1)->first();
         $speakers = Speaker::get()->take($home_speaker->how_many);
-        $packages = Package::get();
+        $packages = Package::get()->take($home_pricing->how_many);
         $posts = Post::get()->take(3);
         $sponsors = Sponsor::get();
-        return view('front.home', compact('home_banner', 'home_welcome', 'home_counter', 'home_speaker', 'speakers', 'packages', 'posts', 'sponsors'));
+        return view('front.home', compact('home_banner', 'home_welcome', 'home_counter', 'home_speaker', 'home_pricing', 'speakers', 'packages', 'posts', 'sponsors'));
     }
     
     public function schedule()

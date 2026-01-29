@@ -30,7 +30,9 @@
                             <li class="{{ Request::is('admin/home-welcome*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_welcome')}}"><i class="fas fa-angle-right"></i>Welcome</a></li>
                             <li class="{{ Request::is('admin/home-counter*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_counter')}}"><i class="fas fa-angle-right"></i>Counter</a></li>
                             <li class="{{ Request::is('admin/home-speaker/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_speaker')}}">
-                            <i class="fas fa-hand-point-right"></i> <span>Home Speaker</span></a></li>
+                            <i class="fas fa-hand-point-right"></i> <span>Speaker</span></a></li>
+                            <li class="{{ Request::is('admin/home-pricing/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_pricing')}}">
+                            <i class="fas fa-hand-point-right"></i> <span>Pricing</span></a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown {{ Request::is('admin/speaker/*') || 

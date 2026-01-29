@@ -183,16 +183,16 @@
         </div>
     @endif    
     
-        
+    @if($home_pricing->status == 'Show')    
         <div id="price-section" class="pt_70 pb_70 gray prices">
             <div class="container">
     
                 <div class="row">
                     <div class="col-sm-1 col-lg-2"></div>
                     <div class="col-xs-12 col-sm-10 col-lg-8 text-center">
-                        <h2 class="title-1 mb_10"><span class="color_green">Pricing</span></h2>
+                        <h2 class="title-1 mb_10"><span class="color_green">{{ $home_pricing->heading }}</span></h2>
                         <p class="heading-space">
-                            You will find below the different pricing options for our event. Choose the one that suits you best and register now! You will have access to all sessions, unlimited coffee and food, and the opportunity to meet with your favorite speakers.
+                              {!! ($home_pricing->description) !!}
                         </p>
                     </div>
                     <div class="col-sm-1 col-lg-2"></div>
@@ -232,7 +232,7 @@
                 </div>
             </div>
         </div>
-    
+    @endif
          
         <div id="blog-section" class="pt_70 pb_70 white blog-section">
             <div class="container">
