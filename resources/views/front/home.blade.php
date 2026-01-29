@@ -200,53 +200,34 @@
     
                 <div class="row pt_40"> 
     
+                 @foreach($packages as $package)  
                     <div class="col-md-4 col-sm-12">
                         <div class="info">
-                            <h5 class="event-ti-style">Standard</h5>
-                            <h3 class="event-ti-style">$49</h3>
+                            <h5 class="event-ti-style">{{$package->name}}</h5>
+                            <h3 class="event-ti-style">${{$package->price}}</h3>
                             <ul>
-                                <li><i class="fa fa-check"></i> Access to all sessions</li>
-                                <li><i class="fa fa-check"></i> Unlimited Drinkgs & Coffee</li>
-                                <li><i class="fa fa-times"></i> Lunch Facility</li>
-                                <li><i class="fa fa-times"></i> Meet with Speakers</li>
+                                @foreach($package->facilities as $facility)
+                                 @php
+                                   
+                                   if($facility->status == 'Yes') {
+                                     $icon = 'fa-check';
+                                    } else {
+                                        $icon = 'fa-times';
+                                    }
+                                  @endphp 
+                                  <li><i class="fa {{ $icon }}"></i> {{ $facility->name }}</li>
+                                @endforeach
+                                
+                              
                             </ul>
                             <div class="global_btn mt_20">
-                                <a class="btn_two" href="buy.html">Buy Ticket</a>
+                                <a class="btn_two" href="{{route('buy_ticket', $package->id)}}">Buy Ticket</a>
                             </div>
                         </div>
                     </div>
+                 @endforeach
     
-                    <div class="col-md-4 col-sm-12">
-                        <div class="info">
-                            <h5 class="event-ti-style">Business</h5>
-                            <h3 class="event-ti-style">$99</h3>
-                            <ul>
-                                <li><i class="fa fa-check"></i> Access to all sessions</li>
-                                <li><i class="fa fa-check"></i> Unlimited Drinkgs & Coffee</li>
-                                <li><i class="fa fa-check"></i> Lunch Facility</li>
-                                <li><i class="fa fa-times"></i> Meet with Speakers</li>
-                            </ul>
-                            <div class="global_btn mt_20">
-                                <a class="btn_two" href="buy.html">Buy Ticket</a>
-                            </div>
-                        </div>
-                    </div>
-    
-                <div class="col-md-4 col-sm-12">
-                    <div class="info">
-                        <h5 class="event-ti-style">Premium</h5>
-                        <h3 class="event-ti-style">$139</h3>
-                        <ul>
-                            <li><i class="fa fa-check"></i> Access to all sessions</li>
-                            <li><i class="fa fa-check"></i> Unlimited Drinkgs & Coffee</li>
-                            <li><i class="fa fa-check"></i> Lunch Facility</li>
-                            <li><i class="fa fa-check"></i> Meet with Speakers</li>
-                        </ul>
-                        <div class="global_btn mt_20">
-                            <a class="btn_two" href="buy.html">Buy Ticket</a>
-                        </div>
-                    </div>
-                </div>
+              
                 </div>
             </div>
         </div>
@@ -267,47 +248,23 @@
                     <div class="col-sm-1 col-lg-2"></div>
                 </div>
                 <div class="row pt_40">
+                  @foreach($posts as $post)
                     <div class="col-lg-4 col-sm-6 col-xs-12">
                         <div class="blog-box text-center">
                             <div class="blog-post-images">
-                                <a href="post.html">
-                                    <img src="{{asset('dist-front/images/post-1.jpg')}}" alt="image">
+                                <a href="{{route('post', $post->slug)}}">
+                                    <img src="{{asset('uploads/'.$post->photo)}}" alt="image">
                                 </a>
                             </div>
                             <div class="blogs-post">
-                                <h4><a href="post.html">Essential Tips for a Successful Virtual Conference</a></h4>
+                                <h4><a href="{{route('post', $post->slug)}}">{{$post->title }}</a></h4>
                                 <p>
-                                    Organizing a virtual conference can be challenging. Focus on engaging content, interactive sessions, & reliable technology to ensure a successful event.
+                                   {!! $post->short_description !!}
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 col-xs-12">
-                        <div class="blog-box text-center">
-                            <div class="blog-post-images">
-                                <a href="post.html"><img src="{{asset('dist-front/images/post-2.jpg')}}" alt="image"></a>
-                            </div>
-                            <div class="blogs-post">
-                                <h4><a href="post.html">Maximizing Your Networking Opportunities at Events</a></h4>
-                                <p>
-                                    Networking at events requires strategic planning. Attend relevant sessions, participate in discussions, and utilize apps to connect with professionals.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-xs-12">
-                        <div class="blog-box text-center">
-                            <div class="blog-post-images">
-                                <a href="post.html"><img src="{{asset('dist-front/images/post-3.jpg')}}" alt="image"></a>
-                            </div>
-                            <div class="blogs-post">
-                                <h4><a href="post.html">How to Choose the Perfect Venue for Your Conference</a></h4>
-                                <p>
-                                    Selecting the ideal venue involves considering location, capacity, and amenities. Ensure it aligns with your goals, and fits within your budget.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                  @endforeach
                 </div>
             </div>
         </div>
@@ -330,30 +287,11 @@
                 <div class="row pt_40">
                     <div class="col-md-12">
                         <div class="owl-carousel">
+                          @foreach($sponsors as $sponsor)
                             <div class="sponsors-logo">
-                                <img src="{{asset('dist-front/images/partner-1.png')}}" class="img-responsive" alt="sponsor logo">
+                               <a href="{{route('sponsor', $sponsor->slug)}}"><img src="{{asset('uploads/'.$sponsor->logo)}}" class="img-responsive" alt=""></a>
                             </div>
-                            <div class="sponsors-logo">
-                                <img src="{{asset('dist-front/images/partner-2.png')}}" class="img-responsive" alt="sponsor logo">
-                            </div>
-                            <div class="sponsors-logo">
-                                <img src="{{asset('dist-front/images/partner-3.png')}}" class="img-responsive" alt="sponsor logo">
-                            </div>
-                            <div class="sponsors-logo">
-                                <img src="{{asset('dist-front/images/partner-4.png')}}" class="img-responsive" alt="sponsor logo">
-                            </div>
-                            <div class="sponsors-logo">
-                                <img src="{{asset('dist-front/images/partner-5.png')}}" class="img-responsive" alt="sponsor logo">
-                            </div>
-                            <div class="sponsors-logo">
-                                <img src="{{asset('dist-front/images/partner-6.png')}}" class="img-responsive" alt="sponsor logo">
-                            </div>
-                            <div class="sponsors-logo">
-                                <img src="{{asset('dist-front/images/partner-7.png')}}" class="img-responsive" alt="sponsor logo">
-                            </div>
-                            <div class="sponsors-logo">
-                                <img src="{{asset('dist-front/images/partner-8.png')}}" class="img-responsive" alt="sponsor logo">
-                            </div>
+                          @endforeach  
                         </div>
                     </div>
                 </div>
