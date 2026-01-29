@@ -109,17 +109,17 @@
     @endif
     
     
-    
+    @if($home_speaker->status == 'Show')
         <div id="speakers" class="pt_70 pb_70 gray team">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-1 col-lg-2"></div>
                     <div class="col-xs-12 col-sm-10 col-lg-8 text-center">
                         <h2 class="title-1 mb_10">
-                            <span class="color_green">Speakers</span>
+                            <span class="color_green">{{ $home_speaker->heading }}</span>
                         </h2>
                         <p class="heading-space">
-                            You will find below the list of our valuable speakers. They are all experts in their field and will share their knowledge with you.
+                            {!! ($home_speaker->description) !!}
                         </p>
                     </div>
                     <div class="col-sm-1 col-lg-2"></div>
@@ -140,6 +140,7 @@
                 </div>
             </div>
         </div>
+    @endif
     
      @if($home_counter->status == 'Show')
         <div id="counter-section" class="pt_70 pb_70" style="background-image: url({{asset('uploads/'.$home_counter->background)}});">

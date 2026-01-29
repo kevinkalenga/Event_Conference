@@ -26,9 +26,11 @@
                        Request::is('admin/home-welcome*') || Request::is('admin/home-counter*') ? 'active': '' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Home Section</span></a>
                         <ul class="dropdown-menu">
-                            <li class="{{ Request::is('admin/home-banner*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_banner')}}"><i class="fas fa-angle-right"></i>Home Banner</a></li>
-                            <li class="{{ Request::is('admin/home-welcome*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_welcome')}}"><i class="fas fa-angle-right"></i>Home Welcome</a></li>
-                            <li class="{{ Request::is('admin/home-counter*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_counter')}}"><i class="fas fa-angle-right"></i>Home Counter</a></li>
+                            <li class="{{ Request::is('admin/home-banner*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_banner')}}"><i class="fas fa-angle-right"></i>Banner</a></li>
+                            <li class="{{ Request::is('admin/home-welcome*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_welcome')}}"><i class="fas fa-angle-right"></i>Welcome</a></li>
+                            <li class="{{ Request::is('admin/home-counter*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_counter')}}"><i class="fas fa-angle-right"></i>Counter</a></li>
+                            <li class="{{ Request::is('admin/home-speaker/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_speaker')}}">
+                            <i class="fas fa-hand-point-right"></i> <span>Home Speaker</span></a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown {{ Request::is('admin/speaker/*') || 
@@ -82,6 +84,7 @@
                         <i class="fas fa-hand-point-right"></i> <span>Attendees</span></a></li>
                      <li class="{{ Request::is('admin/message/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_message_index')}}">
                         <i class="fas fa-hand-point-right"></i> <span>Messages</span></a></li>
+                     
                      
 
                     

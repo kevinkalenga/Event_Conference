@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\Admin\AdminAttendeeController;
 use App\Http\Controllers\Admin\AdminMessageController;
+use App\Http\Controllers\Admin\AdminHomeSpeakerController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -94,6 +95,8 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/home-welcome', [AdminHomeWelcomeController::class, 'update'])->name('admin_home_welcome_update');
   Route::get('/home-counter', [AdminHomeCounterController::class, 'index'])->name('admin_home_counter');
   Route::post('/home-counter', [AdminHomeCounterController::class, 'update'])->name('admin_home_counter_update');
+  Route::get('/home-speaker',[AdminHomeSpeakerController::class,'index'])->name('admin_home_speaker');
+  Route::post('/home-speaker',[AdminHomeSpeakerController::class,'update'])->name('admin_home_speaker_update');
   // Speaker
   Route::get('/speaker/index', [AdminSpeakerController::class, 'index'])->name('admin_speaker_index');
   Route::get('/speaker/create', [AdminSpeakerController::class, 'create'])->name('admin_speaker_create');
