@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\Admin\AdminAttendeeController;
+use App\Http\Controllers\Admin\AdminMessageController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -207,6 +208,12 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/attendee/update/{id}', [AdminAttendeeController::class, 'update'])->name('admin_attendee_update');
   Route::get('/attendee/delete/{id}', [AdminAttendeeController::class, 'delete'])->name('admin_attendee_delete');
   Route::post('/attendee/store', [AdminAttendeeController::class, 'store'])->name('admin_attendee_store');
+
+  // Message 
+  Route::get('/message/index',[AdminMessageController::class,'index'])->name('admin_message_index');
+  Route::get('/message/detail/{id}',[AdminMessageController::class,'detail'])->name('admin_message_detail');
+  Route::post('/message/detail/submit/{id}',[AdminMessageController::class,'detail_submit'])->name('admin_message_detail_submit');
+
   
 
 });

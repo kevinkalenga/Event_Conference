@@ -80,6 +80,8 @@
                         <i class="fas fa-hand-point-right"></i> <span>Tickets</span></a></li>
                      <li class="{{ Request::is('admin/attendee/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_attendee_index')}}">
                         <i class="fas fa-hand-point-right"></i> <span>Attendees</span></a></li>
+                     <li class="{{ Request::is('admin/message/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_message_index')}}">
+                        <i class="fas fa-hand-point-right"></i> <span>Messages</span></a></li>
                      
 
                     
