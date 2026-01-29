@@ -41,38 +41,48 @@
                         </form>
         
                         <h4 class="message-heading mt_40">All Messages</h4>
-                        <div class="message-item message-item-admin-border">
-                            <div class="message-top">
-                                <div class="left">
-                                    <img src="images/admin.jpg" alt="">
-                                </div>
-                                <div class="right">
-                                    <h4>Morshedul Arefin</h4>
-                                    <h5>Admin</h5>
-                                    <div class="date-time">2024-08-20 09:33:22 AM</div>
-                                </div>
+                        @forelse($messages as $message)
+                        @php
+
+                        if($message->admin_id == 1) {
+                            $message_class = 'message-item-admin-border';
+                            $user_name = $admin->name;
+                            $designation = 'Admin';
+                            $photo = $admin->photo;
+                        } else {
+                            $message_class = '';
+                            $user_name = Auth::guard('web')->user()->name;
+                            $designation = 'Attendee';
+                            $photo = Auth::guard('web')->user()->photo;
+                            if($photo == '') {
+                                $photo = 'default.png';
+                            }
+                        }
+
+                        @endphp
+                        <div class="message-item {{ $message_class }}">
+                          <div class="message-top">
+                            <div class="left">
+                              <img src="{{ asset('uploads/'.$photo) }}" alt="">
                             </div>
-                            <div class="message-bottom">
-                                <p>Thank you for contacting. Sure, you can take it with you without any problem.</p>
-                            </div>
+                            <div class="right">
+                               <h4>{{ $user_name }}</h4>
+                                <h5>{{ $designation }}</h5>
+                            <div class="date-time">{{ $message->create_at }}</div>
+                          </div>
                         </div>
-                        
-                        <div class="message-item">
-                            <div class="message-top">
-                                <div class="left">
-                                    <img src="images/attendee.jpg" alt="">
-                                </div>
-                                <div class="right">
-                                    <h4>Smith Brent</h4>
-                                    <h5>Client</h5>
-                                    <div class="date-time">2024-08-20 08:12:43 AM</div>
-                                </div>
-                            </div>
-                            <div class="message-bottom">
-                                <p>I forgot to tell one thing. Can you please allow some toys for my son in this tour? It will be very much helpful if you allow.</p>
-                            </div>
+                        <div class="message-bottom">
+                          <p>
+                            {!! nl2br($message->message) !!}
+                          </p>
                         </div>
+                   </div>
+                    @empty
+                    <div style="background:#f0c9cc;padding:10px;border-radius:3px;">
+                     No message found
                     </div>
+                   @endforelse
+            </div>
         </div>
     </div>
 </div>

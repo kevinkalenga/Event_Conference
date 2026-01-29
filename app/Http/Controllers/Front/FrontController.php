@@ -212,7 +212,7 @@ class FrontController extends Controller
 
         if($request->photo) {
             $request->validate([
-                'photo' => ['image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+                'photo' => ['image', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'],
             ]);
 
             if($user->photo != '' && file_exists(public_path('uploads/' . $user->photo))) {
@@ -719,8 +719,9 @@ class FrontController extends Controller
 
     public function message()
     {
-       
-        return view('attendee.message');
+        $messages = Message::orderBy('id','asc')->where('user_id',Auth::guard('web')->user()->id)->get();
+        $admin = Admin::where('id',1)->first();
+        return view('attendee.message', compact('messages', 'admin'));
     }
 
 
