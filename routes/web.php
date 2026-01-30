@@ -28,12 +28,14 @@ use App\Http\Controllers\Admin\AdminHomeSpeakerController;
 use App\Http\Controllers\Admin\AdminHomePricingController;
 use App\Http\Controllers\Admin\AdminHomeBlogController;
 use App\Http\Controllers\Admin\AdminHomeSponsorController;
+use App\Http\Controllers\Admin\AdminOtherPageController;
 
 use App\Http\Controllers\Front\FrontController;
 
 // Home
  Route::get('/', [FrontController::class, 'home'])->name('home');
  Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
+ Route::post('/contact', [FrontController::class, 'contact_submit'])->name('contact_submit');
  Route::get('/speakers', [FrontController::class, 'speakers'])->name('speakers');
  Route::get('/speaker/{slug}', [FrontController::class, 'speaker'])->name('speaker');
  Route::get('/schedule', [FrontController::class, 'schedule'])->name('schedule');
@@ -106,6 +108,8 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/home-blog',[AdminHomeBlogController::class,'update'])->name('admin_home_blog_update');
   Route::get('/home-sponsor',[AdminHomeSponsorController::class,'index'])->name('admin_home_sponsor');
   Route::post('/home-sponsor',[AdminHomeSponsorController::class,'update'])->name('admin_home_sponsor_update');
+  Route::get('/contact-page',[AdminOtherPageController::class,'contact_page'])->name('admin_contact_page');
+  Route::post('/contact-page',[AdminOtherPageController::class,'contact_page_update'])->name('admin_contact_page_update');
   // Speaker
   Route::get('/speaker/index', [AdminSpeakerController::class, 'index'])->name('admin_speaker_index');
   Route::get('/speaker/create', [AdminSpeakerController::class, 'create'])->name('admin_speaker_create');

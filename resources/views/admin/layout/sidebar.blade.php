@@ -24,7 +24,7 @@
                      
                     <li class="nav-item dropdown {{ Request::is('admin/home-banner*') || 
                        Request::is('admin/home-welcome*') || Request::is('admin/home-counter*') || Request::is('admin/home-blog*') || Request::is('admin/home-sponsor*') ? 'active': '' }}">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Home Section</span></a>
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Home Page</span></a>
                         <ul class="dropdown-menu">
                             <li class="{{ Request::is('admin/home-banner*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_banner')}}"><i class="fas fa-angle-right"></i>Banner</a></li>
                             <li class="{{ Request::is('admin/home-welcome*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_welcome')}}"><i class="fas fa-angle-right"></i>Welcome</a></li>
@@ -39,6 +39,16 @@
                             <i class="fas fa-hand-point-right"></i> <span>Sponsor</span></a></li>
                         </ul>
                     </li>
+                    
+                    <li class="nav-item dropdown {{ Request::is('admin/contact-page*') ? 'active': '' }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Other Pages</span></a>
+                        <ul class="dropdown-menu">
+                            <li class="{{ Request::is('admin/contact-page*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_contact_page')}}"><i class="fas fa-angle-right"></i>Contact Page</a></li>
+                            
+                        </ul>
+                    </li>
+                    
+                    
                     <li class="nav-item dropdown {{ Request::is('admin/speaker/*') || 
                        Request::is('admin/schedule-day/*') || Request::is('admin/schedule/*') || Request::is('admin/speaker-schedule/*')  ? 'active': '' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Speaker Section</span></a>
@@ -66,6 +76,8 @@
                             <li class="{{ Request::is('admin/sponsor/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_sponsor_index')}}"><i class="fas fa-angle-right"></i>Sponsors</a></li>
                         </ul>
                     </li>
+
+                    
                      
                      
                      <li class="{{ Request::is('admin/organiser/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_organiser_index')}}">

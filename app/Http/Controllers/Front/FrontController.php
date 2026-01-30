@@ -31,6 +31,7 @@ use App\Models\HomeSpeaker;
 use App\Models\HomePricing;
 use App\Models\HomeBlog;
 use App\Models\HomeSponsor;
+use App\Models\ContactPageItem;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
@@ -104,8 +105,38 @@ class FrontController extends Controller
     
     public function contact()
     {
-        return view('front.contact');
+        $contact_page_data = ContactPageItem::where('id',1)->first();
+        return view('front.contact',  compact('contact_page_data'));
     }
+    
+    public function contact_submit(Request $request)
+    {
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'subject' => ['required'],
+            'message' => ['required'],
+        ]);
+
+        $admin = Admin::where('id',1)->first();
+       
+        $subject = "Contact Message";
+        $message = "Visitor Information:<br><br>";
+        $message .= "<b>Name:</b><br>".$request->name."<br><br>";
+        $message .= "<b>Email:</b><br>".$request->email."<br><br>";
+        $message .= "<b>Message:</b><br>".$request->message."<br><br>";
+
+        \Mail::to($admin->email)->send(new Websitemail($subject,$message));
+
+        return redirect()->back()->with('success','Message is sent successfully!');
+    }
+    
+    
+    
+    
+    
+    
+    
     public function registration()
     {
         return view('front.registration');

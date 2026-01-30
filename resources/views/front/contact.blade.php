@@ -11,7 +11,7 @@
                             <h2>Contact</h2>
                             <div class="breadcrumb-container">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                                     <li class="breadcrumb-item active">Contact</li>
                                 </ol>
                             </div>
@@ -26,7 +26,8 @@
                 <div class="row">
                     <div class="col-lg-8 col-sm-12">
                         <div class="contact">
-                            <form class="form" method="post" action="">
+                            <form class="form" method="post" action="{{route('contact_submit')}}">
+                                @csrf
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <input name="name" class="form-control" placeholder="Name" type="text">
@@ -51,44 +52,57 @@
                     </div>
                     <div class="col-lg-4 col-sm-12">
                         <div class="contact-info">
-                            <div class="contact-inner-box">
-                                <div class="icon">
-                                    <div class="contact-inner-icon">
-                                        <i class="fa fa-map-marker"></i>
-                                    </div>
-                                </div>
-                                <div class="text">
-                                    <div class="contact-inner-text">
-                                        Address: <br><span>43, Park Street, NYC, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contact-inner-box">
-                                <div class="icon">
-                                    <div class="contact-inner-icon">
-                                        <i class="fa fa-envelope-o"></i>
-                                    </div>
-                                </div>
-                                <div class="text">
-                                    <div class="contact-inner-text">
-                                        Email: <br><span>contact@example.com</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contact-inner-box">
-                                <div class="icon">
-                                    <div class="contact-inner-icon">
-                                        <i class="fa fa-phone"></i>
-                                    </div>
-                                </div>
-                                <div class="text">
-                                    <div class="contact-inner-text">
-                                        Phone: <br><span>234-423-1266</span>
-                                    </div>
-                                </div>
-                            </div>
+                                @if($contact_page_data->address != '')
+                                  <div class="contact-inner-box">
+                                      <div class="icon">
+                                          <div class="contact-inner-icon">
+                                              <i class="fa fa-map-marker"></i>
+                                          </div>
+                                      </div>
+                                      <div class="text">
+                                          <div class="contact-inner-text">
+                                              Address: <br><span>{{ $contact_page_data->address }}</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                @endif
+                                @if($contact_page_data->email != '')
+                                  <div class="contact-inner-box">
+                                      <div class="icon">
+                                          <div class="contact-inner-icon">
+                                              <i class="fa fa-envelope-o"></i>
+                                          </div>
+                                      </div>
+                                      <div class="text">
+                                          <div class="contact-inner-text">
+                                              Email: <br><span>{{ $contact_page_data->email }}</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                @endif
+                                @if($contact_page_data->phone != '')
+                                  <div class="contact-inner-box">
+                                      <div class="icon">
+                                          <div class="contact-inner-icon">
+                                              <i class="fa fa-phone"></i>
+                                          </div>
+                                      </div>
+                                      <div class="text">
+                                          <div class="contact-inner-text">
+                                              Phone: <br><span>{{ $contact_page_data->phone }}</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                @endif
                         </div>
                     </div>
+                    @if($contact_page_data->map != '')
+                      <div class="col-md-12 mt-5">
+                          <div class="map">
+                              {!! $contact_page_data->map !!}
+                          </div>
+                      </div>
+                    @endif
                 </div>
             </div>
         </div>
