@@ -32,6 +32,7 @@ use App\Models\HomePricing;
 use App\Models\HomeBlog;
 use App\Models\HomeSponsor;
 use App\Models\ContactPageItem;
+use App\Models\TermPageItem;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
@@ -788,6 +789,13 @@ class FrontController extends Controller
         \Mail::to($admin->email)->send(new Websitemail($subject,$message));
 
         return redirect()->back()->with('success','Message is sent successfully!');
+    }
+
+
+    public function term()
+    {
+        $term_page_data = TermPageItem::where('id',1)->first();
+        return view('front.term', compact('term_page_data'));
     }
 
 

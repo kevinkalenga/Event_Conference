@@ -51,6 +51,8 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/post/{slug}', [FrontController::class, 'post'])->name('post');
  Route::get('/blog', [FrontController::class, 'blog'])->name('blog');
  Route::get('/pricing',[FrontController::class,'pricing'])->name('pricing');
+ Route::get('/terms-of-use',[FrontController::class,'term'])->name('term');
+ 
  Route::get('/login', [FrontController::class, 'login'])->name('login');
  Route::post('/login', [FrontController::class, 'login_submit'])->name('login_submit');
  Route::get('/registration', [FrontController::class, 'registration'])->name('registration');
@@ -90,7 +92,7 @@ Route::middleware('auth')->prefix('attendee')->group(function(){
  // Admin 
 
 Route::middleware('admin')->prefix('admin')->group(function(){
-    // secrete pages then you can not have the access with out login
+    // secrete pages then you can not have the access without login if you're not an admin
   Route::get('/profile', [AdminAuthController::class, 'profile'])->name('admin_profile');
   Route::post('/profile', [AdminAuthController::class, 'profile_submit'])->name('admin_profile_submit');
   Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin_dashboard');
@@ -110,6 +112,8 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/home-sponsor',[AdminHomeSponsorController::class,'update'])->name('admin_home_sponsor_update');
   Route::get('/contact-page',[AdminOtherPageController::class,'contact_page'])->name('admin_contact_page');
   Route::post('/contact-page',[AdminOtherPageController::class,'contact_page_update'])->name('admin_contact_page_update');
+  Route::get('/term-page',[AdminOtherPageController::class,'term_page'])->name('admin_term_page');
+  Route::post('/term-page',[AdminOtherPageController::class,'term_page_update'])->name('admin_term_page_update');
   // Speaker
   Route::get('/speaker/index', [AdminSpeakerController::class, 'index'])->name('admin_speaker_index');
   Route::get('/speaker/create', [AdminSpeakerController::class, 'create'])->name('admin_speaker_create');

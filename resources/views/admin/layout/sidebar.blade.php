@@ -40,10 +40,11 @@
                         </ul>
                     </li>
                     
-                    <li class="nav-item dropdown {{ Request::is('admin/contact-page*') ? 'active': '' }}">
+                    <li class="nav-item dropdown {{ Request::is('admin/contact-page*') || Request::is('admin/term-page*') ? 'active': '' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Other Pages</span></a>
                         <ul class="dropdown-menu">
                             <li class="{{ Request::is('admin/contact-page*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_contact_page')}}"><i class="fas fa-angle-right"></i>Contact Page</a></li>
+                            <li class="{{ Request::is('admin/term-page*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_term_page')}}"><i class="fas fa-angle-right"></i>Terms Page</a></li>
                             
                         </ul>
                     </li>
