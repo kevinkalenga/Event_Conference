@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="" class="banner_btn video_btn">BUY TICKETS</a>
+                            <a href="{{ route('pricing') }}" class="banner_btn video_btn">BUY TICKETS</a>
                         </div>
                     </div>
                 </div>
@@ -233,17 +233,18 @@
             </div>
         </div>
     @endif
-         
+    
+    @if($home_blog->status == 'Show')
         <div id="blog-section" class="pt_70 pb_70 white blog-section">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-1 col-lg-2"></div>
                     <div class="col-xs-12 col-sm-10 col-lg-8 text-center">
                         <h2 class="title-1 mb_15">
-                            <span class="color_green">Latest News</span>
+                            <span class="color_green">{{ $home_blog->heading }}</span>
                         </h2>
                         <p class="heading-space">
-                            All the latest news and updates about our event and conference are available here. Stay informed and don't miss any important information!
+                            {!! ($home_blog->description) !!}
                         </p>
                     </div>
                     <div class="col-sm-1 col-lg-2"></div>
@@ -269,18 +270,18 @@
                 </div>
             </div>
         </div>
-    
-    
+    @endif
+    @if($home_sponsor->status == 'Show')
         <div id="sponsor-section" class="pt_70 pb_70 gray">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-1 col-lg-2"></div>
                     <div class="col-xs-12 col-sm-10 col-lg-8 text-center">
                         <h2 class="title-1 mb_15">
-                            <span class="color_green">Our Sponsers</span>
+                            <span class="color_green">{{ $home_sponsor->heading }}</span>
                         </h2>
                         <p class="heading-space">
-                            If you want to become a sponsor, please contact us. We offer different sponsorship packages that will help you promote your brand and reach a wider audience.
+                             {!! ($home_sponsor->description) !!}
                         </p>
                     </div>
                     <div class="col-sm-1 col-lg-2"></div>
@@ -298,7 +299,7 @@
                 </div>
             </div>
         </div>
-
+@endif
      
 <!-- SCRIPT à placer après le compteur, avant </body> -->
 

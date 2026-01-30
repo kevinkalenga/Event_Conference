@@ -23,7 +23,7 @@
                      
                      
                     <li class="nav-item dropdown {{ Request::is('admin/home-banner*') || 
-                       Request::is('admin/home-welcome*') || Request::is('admin/home-counter*') ? 'active': '' }}">
+                       Request::is('admin/home-welcome*') || Request::is('admin/home-counter*') || Request::is('admin/home-blog*') || Request::is('admin/home-sponsor*') ? 'active': '' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Home Section</span></a>
                         <ul class="dropdown-menu">
                             <li class="{{ Request::is('admin/home-banner*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_banner')}}"><i class="fas fa-angle-right"></i>Banner</a></li>
@@ -33,6 +33,10 @@
                             <i class="fas fa-hand-point-right"></i> <span>Speaker</span></a></li>
                             <li class="{{ Request::is('admin/home-pricing/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_pricing')}}">
                             <i class="fas fa-hand-point-right"></i> <span>Pricing</span></a></li>
+                            <li class="{{ Request::is('admin/home-blog/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_blog')}}">
+                            <i class="fas fa-hand-point-right"></i> <span>Blog</span></a></li>
+                            <li class="{{ Request::is('admin/home-sponsor/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_home_sponsor')}}">
+                            <i class="fas fa-hand-point-right"></i> <span>Sponsor</span></a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown {{ Request::is('admin/speaker/*') || 

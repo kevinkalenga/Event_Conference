@@ -26,6 +26,8 @@ use App\Http\Controllers\Admin\AdminAttendeeController;
 use App\Http\Controllers\Admin\AdminMessageController;
 use App\Http\Controllers\Admin\AdminHomeSpeakerController;
 use App\Http\Controllers\Admin\AdminHomePricingController;
+use App\Http\Controllers\Admin\AdminHomeBlogController;
+use App\Http\Controllers\Admin\AdminHomeSponsorController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -100,6 +102,10 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/home-speaker',[AdminHomeSpeakerController::class,'update'])->name('admin_home_speaker_update');
   Route::get('/home-pricing',[AdminHomePricingController::class,'index'])->name('admin_home_pricing');
   Route::post('/home-pricing',[AdminHomePricingController::class,'update'])->name('admin_home_pricing_update');
+  Route::get('/home-blog',[AdminHomeBlogController::class,'index'])->name('admin_home_blog');
+  Route::post('/home-blog',[AdminHomeBlogController::class,'update'])->name('admin_home_blog_update');
+  Route::get('/home-sponsor',[AdminHomeSponsorController::class,'index'])->name('admin_home_sponsor');
+  Route::post('/home-sponsor',[AdminHomeSponsorController::class,'update'])->name('admin_home_sponsor_update');
   // Speaker
   Route::get('/speaker/index', [AdminSpeakerController::class, 'index'])->name('admin_speaker_index');
   Route::get('/speaker/create', [AdminSpeakerController::class, 'create'])->name('admin_speaker_create');
