@@ -19,15 +19,15 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="card card-statistic-1">
-                            <div class="card-icon bg-primary">
+                            <div class="card-icon bg-info">
                                 <i class="far fa-user"></i>
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
-                                    <h4>Total News Categories</h4>
+                                    <h4>Total Posts</h4>
                                 </div>
                                 <div class="card-body">
-                                    12
+                                     {{ $total_posts }}
                                 </div>
                             </div>
                         </div>
@@ -39,10 +39,10 @@
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
-                                    <h4>Total News</h4>
+                                    <h4>Total Testimonials</h4>
                                 </div>
                                 <div class="card-body">
-                                    122
+                                     {{ $total_testimonials }}
                                 </div>
                             </div>
                         </div>
@@ -54,10 +54,145 @@
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
-                                    <h4>Total Users</h4>
+                                    <h4>Total Speakers</h4>
                                 </div>
                                 <div class="card-body">
-                                    45
+                                     {{ $total_speakers }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-success">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Schedule Days</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $total_schedule_days }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-primary">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Sponsors</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $total_sponsors }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-dark">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Organisers</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $total_organisers }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-primary">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Attendees</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $total_attendees }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-success">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Packages</h4>
+                                </div>
+                                <div class="card-body">
+                                     {{ $total_packages }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-dark">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Tickets</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $total_tickets }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-success">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Subscribers</h4>
+                                </div>
+                                <div class="card-body">
+                                     {{ $total_subscribers }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-danger">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Photos</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ $total_photos }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-warning">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Videos</h4>
+                                </div>
+                                <div class="card-body">
+                                      {{ $total_videos }}
                                 </div>
                             </div>
                         </div>
