@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\AdminHomePricingController;
 use App\Http\Controllers\Admin\AdminHomeBlogController;
 use App\Http\Controllers\Admin\AdminHomeSponsorController;
 use App\Http\Controllers\Admin\AdminOtherPageController;
+use App\Http\Controllers\Admin\AdminSubscriberController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -238,6 +239,12 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::get('/message/index',[AdminMessageController::class,'index'])->name('admin_message_index');
   Route::get('/message/detail/{id}',[AdminMessageController::class,'detail'])->name('admin_message_detail');
   Route::post('/message/detail/submit/{id}',[AdminMessageController::class,'detail_submit'])->name('admin_message_detail_submit');
+
+    // Subscriber 
+  Route::get('/subscriber/index',[AdminSubscriberController::class,'index'])->name('admin_subscriber_index');
+  Route::get('/subscriber/delete/{id}',[AdminSubscriberController::class,'delete'])->name('admin_subscriber_delete');
+  Route::get('/subscriber/message/all',[AdminSubscriberController::class,'message_all'])->name('admin_subscriber_message_all');
+  Route::post('/subscriber/message/all/submit',[AdminSubscriberController::class,'message_all_submit'])->name('admin_subscriber_message_all_submit');
 
   
 

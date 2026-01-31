@@ -84,6 +84,9 @@
                      
                      <li class="{{ Request::is('admin/organiser/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_organiser_index')}}">
                         <i class="fas fa-hand-point-right"></i> <span>Organisers</span></a></li>
+                     
+                     <li class="{{ Request::is('admin/subscriber/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_subscriber_index')}}">
+                        <i class="fas fa-hand-point-right"></i> <span>Subscribers</span></a></li>
                      <li class="{{ Request::is('admin/accomodation/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_accomodation_index')}}">
                         <i class="fas fa-hand-point-right"></i> <span>Accomodations</span></a></li>
                      <li class="{{ Request::is('admin/photo/*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_photo_index')}}">
