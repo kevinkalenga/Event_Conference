@@ -33,6 +33,7 @@ use App\Models\HomeBlog;
 use App\Models\HomeSponsor;
 use App\Models\ContactPageItem;
 use App\Models\TermPageItem;
+use App\Models\PrivacyPageItem;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
@@ -133,7 +134,11 @@ class FrontController extends Controller
     }
     
     
-    
+    public function privacy()
+    {
+        $privacy_page_data = PrivacyPageItem::where('id',1)->first();
+        return view('front.privacy', compact('privacy_page_data'));
+    }
     
     
     

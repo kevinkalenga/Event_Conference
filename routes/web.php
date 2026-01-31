@@ -52,6 +52,7 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/blog', [FrontController::class, 'blog'])->name('blog');
  Route::get('/pricing',[FrontController::class,'pricing'])->name('pricing');
  Route::get('/terms-of-use',[FrontController::class,'term'])->name('term');
+ Route::get('/privacy-policy',[FrontController::class,'privacy'])->name('privacy');
  
  Route::get('/login', [FrontController::class, 'login'])->name('login');
  Route::post('/login', [FrontController::class, 'login_submit'])->name('login_submit');
@@ -114,6 +115,8 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::post('/contact-page',[AdminOtherPageController::class,'contact_page_update'])->name('admin_contact_page_update');
   Route::get('/term-page',[AdminOtherPageController::class,'term_page'])->name('admin_term_page');
   Route::post('/term-page',[AdminOtherPageController::class,'term_page_update'])->name('admin_term_page_update');
+  Route::get('/privacy-page',[AdminOtherPageController::class,'privacy_page'])->name('admin_privacy_page');
+  Route::post('/privacy-page',[AdminOtherPageController::class,'privacy_page_update'])->name('admin_privacy_page_update');
   // Speaker
   Route::get('/speaker/index', [AdminSpeakerController::class, 'index'])->name('admin_speaker_index');
   Route::get('/speaker/create', [AdminSpeakerController::class, 'create'])->name('admin_speaker_create');

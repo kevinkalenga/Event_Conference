@@ -46,7 +46,7 @@
                                         <div class="widget-content">
                                             <ul class="list">
                                                 <li><a href="{{route('term')}}">Terms of Use</a></li>
-                                                <li><a href="privacy.html">Privacy Policy</a></li>
+                                                <li><a href="{{route('privacy')}}">Privacy Policy</a></li>
                                                 <li><a href="{{route('schedule')}}">Schedule</a></li>
                                                 <li><a href="{{route('contact')}}">Contact Us</a></li>
                                             </ul>
