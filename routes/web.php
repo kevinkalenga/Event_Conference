@@ -53,6 +53,8 @@ use App\Http\Controllers\Front\FrontController;
  Route::get('/pricing',[FrontController::class,'pricing'])->name('pricing');
  Route::get('/terms-of-use',[FrontController::class,'term'])->name('term');
  Route::get('/privacy-policy',[FrontController::class,'privacy'])->name('privacy');
+ Route::post('/subscribe-submit',[FrontController::class,'subscribe_submit'])->name('subscribe_submit');
+ Route::get('/subscriber-verify/{token}/{email}',[FrontController::class,'subscriber_verify'])->name('subscriber_verify');
  
  Route::get('/login', [FrontController::class, 'login'])->name('login');
  Route::post('/login', [FrontController::class, 'login_submit'])->name('login_submit');

@@ -34,6 +34,7 @@ use App\Models\HomeSponsor;
 use App\Models\ContactPageItem;
 use App\Models\TermPageItem;
 use App\Models\PrivacyPageItem;
+use App\Models\Subscriber;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
@@ -801,6 +802,59 @@ class FrontController extends Controller
     {
         $term_page_data = TermPageItem::where('id',1)->first();
         return view('front.term', compact('term_page_data'));
+    }
+
+
+ 
+
+     
+    public function subscribe_submit(Request $request)
+    {
+      $request->validate([
+         'email' => 'required|email',
+      ]);
+
+       
+          //  Check if email already exists
+          $existing = Subscriber::where('email', $request->email)->first();
+            if($existing) {
+               return redirect()->back()->with('error', 'This email is already subscribed!');
+            }
+      
+    
+       $token = hash('sha256', $request->email . time()); // safer unique token
+
+       $obj = new Subscriber;
+       $obj->email = $request->email;
+       $obj->token = $token;
+       $obj->status = 'pending';
+       $obj->save();
+
+       $verification_link = route('subscriber_verify', ['email' =>urlencode($request->email), 'token'=>$token]);
+
+       $subject = 'Subscriber Verification';
+       $message = 'Please click the following link to verify your email address as subscriber:<br>
+         <a href="'.$verification_link.'">Verify Email</a>';
+
+         \Mail::to($request->email)->send(new Websitemail($subject, $message)); 
+
+         return redirect()->back()->with('success', 'You are subscribed successfully. Please check your email to confirm the verification link.');
+
+    }
+
+
+
+    public function subscriber_verify($token,$email)
+    {
+        $subscriber = Subscriber::where('token',$token)->where('email',$email)->first();
+        if(!$subscriber) {
+            return redirect()->route('home');
+        }
+        $subscriber->token = '';
+        $subscriber->status = 'active';
+        $subscriber->update();
+
+        return redirect()->route('home')->with('success', 'Your email is verified. You will receive the latest news and updates.');
     }
 
 

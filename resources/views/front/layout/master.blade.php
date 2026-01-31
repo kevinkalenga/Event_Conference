@@ -79,12 +79,15 @@
                                         <h2>Newsletter</h2>
                                         <div class="widget-content">
                                             <div class="newsletter-form">
-                                                <form method="post" action="">
+                                                <form method="post" action="{{ route('subscribe_submit') }}" novalidate>
+                                                     @csrf
                                                     <div class="form-group">
                                                         <input type="email" name="email" value="" placeholder="Enter Email Address" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <div class="global_btn"><a class="btn_two" href="#">SUBSCRIBE</a> </div>
+                                                        <div class="global_btn">
+                                                            <button type="submit" class="btn_two">SUBSCRIBE</button>
+                                                        </div>
                                                     </div>
                                                 </form>
                                             </div>
