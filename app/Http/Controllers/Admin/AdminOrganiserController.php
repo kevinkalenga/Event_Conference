@@ -74,7 +74,7 @@ class AdminOrganiserController extends Controller
         $organiser = Organiser::where('id', $id)->first();
       
        $request->validate([
-        'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+        'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'],
         'name' => ['required'],
         'slug' => ['required', 'alpha_dash', 'regex:/^[a-zA-Z-]+$/', Rule::unique('organisers')->ignore($id)],
         'designation' => ['required'],
@@ -83,7 +83,7 @@ class AdminOrganiserController extends Controller
 
        if ($request->hasFile('photo')) {
           $request->validate([
-              'photo' => ['image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+              'photo' => ['image', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'],
           ]);
 
           // Photos par défaut à ne pas supprimer

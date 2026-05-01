@@ -27,7 +27,7 @@ class AdminPostController extends Controller
         'slug' => ['required', 'alpha_dash', 'unique:sponsors,slug'],
         'short_description' => ['required'],
         'description' => ['required'],
-        'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+        'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'],
         
       ]);
 

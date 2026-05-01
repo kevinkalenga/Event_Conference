@@ -38,7 +38,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="w-50">
-                                                    {{--<img src="{{ asset('uploads/'.$setting->logo) }}" alt="" class="h_70">--}}
+                                                    <img src="{{ asset('uploads/'.$setting->logo) }}" alt="" class="h_70">
                                                 </td>
                                                 <td class="w-50">
                                                     <div class="invoice-top-right">

@@ -1,3 +1,7 @@
+@php   
+$setting_data = \App\Models\Setting::where('id', 1)->first();
+@endphp
+
 <!doctype html>
 <html lang="en">
     <head>

@@ -10,7 +10,14 @@
                 <ul class="sidebar-menu">
 
                     <li class="{{ Request::is('admin/dashboard') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_dashboard')}}"><i class="fas fa-home"></i> <span>Dashboard</span></a></li>
-                    
+                    <li class="nav-item dropdown {{ Request::is('admin/setting*') ? 'active': '' }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i><span>Setting</span></a>
+                        <ul class="dropdown-menu">
+                            <li class="{{ Request::is('admin/setting/logo*') ? 'active': '' }}"><a class="nav-link" href="{{route('admin_setting_logo')}}"><i class="fas fa-angle-right"></i>Logo</a></li>
+                            
+                            
+                        </ul>
+                    </li>
                     <!-- <li class="nav-item dropdown active">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Dropdown Items</span></a>
                         <ul class="dropdown-menu">

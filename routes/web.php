@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\AdminHomeBlogController;
 use App\Http\Controllers\Admin\AdminHomeSponsorController;
 use App\Http\Controllers\Admin\AdminOtherPageController;
 use App\Http\Controllers\Admin\AdminSubscriberController;
+use App\Http\Controllers\Admin\AdminSettingController;
 
 use App\Http\Controllers\Front\FrontController;
 
@@ -245,7 +246,11 @@ Route::middleware('admin')->prefix('admin')->group(function(){
   Route::get('/subscriber/delete/{id}',[AdminSubscriberController::class,'delete'])->name('admin_subscriber_delete');
   Route::get('/subscriber/message/all',[AdminSubscriberController::class,'message_all'])->name('admin_subscriber_message_all');
   Route::post('/subscriber/message/all/submit',[AdminSubscriberController::class,'message_all_submit'])->name('admin_subscriber_message_all_submit');
-
+  
+  
+    // Setting 
+    Route::get('/setting/logo',[AdminSettingController::class,'logo'])->name('admin_setting_logo');
+    Route::post('/setting/logo',[AdminSettingController::class,'logo_submit'])->name('admin_setting_logo_submit');
   
 
 });

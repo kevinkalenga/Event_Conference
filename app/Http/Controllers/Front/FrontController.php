@@ -35,6 +35,7 @@ use App\Models\ContactPageItem;
 use App\Models\TermPageItem;
 use App\Models\PrivacyPageItem;
 use App\Models\Subscriber;
+use App\Models\Setting;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
@@ -423,7 +424,7 @@ class FrontController extends Controller
         return view('front.buy_ticket', compact('package'));
     }
 
-    // Paypal(payment)
+    // Paypal and Stripe(payment)
     public function payment(Request $request)
     {
         //  dd($request->all());
@@ -761,8 +762,8 @@ class FrontController extends Controller
     {
         $ticket = Ticket::with('package')->where('id',$id)->first();
         $admin = Admin::where('id',1)->first();
-        // $setting = Setting::where('id',1)->first();
-        return view('attendee.invoice', compact('ticket', 'admin'));
+        $setting = Setting::where('id',1)->first();
+        return view('attendee.invoice', compact('ticket', 'admin', 'setting'));
     }
 
 
